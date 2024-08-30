@@ -1,0 +1,19 @@
+# cqlsh
+
+# DEV & TEST ENVIRONMENT
+
+CREATE KEYSPACE contentv1
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1}
+AND durable_writes = true;
+
+CREATE TABLE contentv1.web_pages (
+  url text PRIMARY KEY,
+  content text
+);
+
+# PROD (must review)
+
+CREATE KEYSPACE contentv1
+WITH replication = {'class': 'NetworkTopologyStrategy', 'DC1' : 2}
+AND durable_writes = true;
+

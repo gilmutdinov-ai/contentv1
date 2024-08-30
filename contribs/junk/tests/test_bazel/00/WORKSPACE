@@ -1,0 +1,81 @@
+workspace(name = "bazel_tutorial_workspace")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# skylib for rules_foreign_cc
+http_archive(
+    name = "bazel_skylib",
+    sha256 = "cd55a062e763b9349921f0f5db8c3933288dc8ba4f76dd9416aac68acee3cb94",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.5.0/bazel-skylib-1.5.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.5.0/bazel-skylib-1.5.0.tar.gz",
+    ],
+)
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+bazel_skylib_workspace()
+
+http_archive(
+    name = "rules_foreign_cc",
+    sha256 = "4b33d62cf109bcccf286b30ed7121129cc34cf4f4ed9d8a11f38d9108f40ba74",
+    strip_prefix = "rules_foreign_cc-0.11.1",
+    url = "https://github.com/bazelbuild/rules_foreign_cc/releases/download/0.11.1/rules_foreign_cc-0.11.1.tar.gz",
+)
+
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+
+rules_foreign_cc_dependencies()
+
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "make")
+
+new_local_repository(
+    name = "libmakecpp",
+    path = "./contrib/libmakecpp",
+)
+
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+# Найти способ где-то пропихнуть флаг типа
+# -Lbazel-bin/external/scylla-cpp/scylla-cpp/lib/libscylla-cpp-driver/
+# иначе не находит статическую библиотеку при подкл к бинарю
+#
+new_local_repository(
+    name = "scylla-cpp",
+    path = "./contribs/scylla-cpp/",
+    build_file_content = """
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+package(default_visibility = ["//visibility:public"])
+filegroup(
+    name = "all_srcs",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+cmake(
+    name = "scylla-cpp-cmake",
+    cache_entries = {
+        "CASS_BUILD_STATIC": "ON",
+        "CASS_BUILD_SHARED": "OFF",
+        "CMAKE_C_FLAGS": "-fPIC",
+        "CMAKE_SHARED_LINKER_FLAGS": "--ld-path=/usr/bin/ld.gold",
+    },
+    lib_source = "@scylla-cpp//:all_srcs",
+    #out_shared_libs = ["libscylla-cpp-driver.so"],
+    out_include_dir = "include",
+    out_static_libs = ["libscylla-cpp-driver_static.a"],
+    includes= ["./include"],
+)
+cc_library(
+    name = "scylla-cpp",
+    deps= [":scylla-cpp-cmake"],
+    linkopts = [
+        "-L./lib/",
+        "-lscylla-cpp-driver_static",
+        "-luv",
+        "-lssl",
+        "-lcrypto",
+        "-lz"
+    ],
+    linkstatic = True,
+    alwayslink = True,
+    visibility = ["//visibility:public"],
+)
+"""
+)

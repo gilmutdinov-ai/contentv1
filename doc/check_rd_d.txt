@@ -1,0 +1,87 @@
+Сетевой протокол [DONE]
+    Обернуть SchedulerAPI в grpc [DONE]
+        Занести grpc [DONE]
+            cpp_proto_compile [DONE]
+            cpp_grpc_compile [DONE]
+            cpp_proto_library [DONE]
+            cpp_grpc_library
+                собрать [DONE]
+                подключить к тест бинарю [DONE]
+        Тестовый сервер в junk [DONE]
+            - https://github.com/chungphb/grpc-cpp/tree/master/sample
+            Поднять async server [DONE]
+            Подключиться async client [DONE]
+            Протестить [DONE]
+        Тест SchedulerAPI через grpc [DONE]
+            Занести сущ прото под базел-прото [DONE]
+            Написать реализацию [DONE]
+                Собрать proto [DONE]
+                Собрать сервер [DONE]
+                    Занести scheduler под SchedulerServer [DONE]
+                    Один метод [DONE]
+                    dtor shutdown [DONE]
+                Собрать клиента [DONE]
+                Два метода [DONE]
+                    Вынести CallDataBase [DONE]
+                    Унаследовать для двух методов [DONE]
+                    Протестить OnFetched [DONE]
+                        FetchResult::toPb [DONE]
+                Сервер: try/catch логирование [DONE]
+            Протестить [DONE]
+
+Занести ScyllaDB
+    Клонировать драйвер [DONE]
+    Поднять в scylla в docker-compose
+        Прибить - было в stack [DONE]
+        Поднять локально [DONE]
+            - max io sysctl not fount
+        Подключиться извне [WONTDO]
+            На 22.04 не встаёт репа scylla, пробуем собрать 24.04 - свои бинари не собираются [DONE]
+        Подключиться из С++ [DONE]
+            Занести драйвер под bazel [DONE]
+                понять какие файлы на выходе [DONE]
+                написать базель правила cmake [DONE]
+                как shared собирается, но проблемы с путями, понять как собрать static [DONE]
+                собрать бинарь с зависимостью [DONE]
+            junk test [DONE]
+        Scylla Обертка [DONE]
+            scylla/ut [DONE]
+            схема [DONE]
+                keyspace [DONE]
+                    починить max io scylla local (wsl->hyper-v & docker command sysctl & wait) [DONE]
+                table [DONE]
+            upsert [DONE]
+            get by key [DONE]
+            scan [DONE]
+        Переписать PageDb [DONE]
+        
+Микросервисы
+    Завести bin/sched
+        Добавить PageDbScylla
+        Добавить SchedulerServer
+            В cli
+            В конфиг
+    Завести bin/workd
+        Добавить PageDbScylla
+        Добавить SchedulerClient
+            В cli
+            В конфиг
+        Вынести в конфиг PageDb: lvldb/scylla
+
+
+Панель метрик Grafana
+    Занести clickhouse
+        Запустить в compose [DONE]
+        Подключиться извне
+        Подключиться из С++
+        Внедрить сбор метрик из приложения
+    Занести Grafana
+
+Техдолг
+    Занести все базы в поддир db/ifs db/scylla db/lvl
+    Поддир actors/scheduler, actors/worker
+    Мигрировать зависимости
+        Перенести из apt в bazel
+        Перенести из WORKSPACE в bzlmod
+            https://bazel.build/external/migration
+    

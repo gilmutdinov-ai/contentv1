@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package contentv1;
+
+message CrawlAttemptsPb {
+
+    enum AttemptStatus {
+        ATTEMPT_STATUS_ENQUEUED = 0;
+        ATTEMPT_STATUS_PENDING = 1;
+        ATTEMPT_STATUS_OK = 2;
+        ATTEMPT_STATUS_CURL_ERR = 3;
+        ATTEMPT_STATUS_4xx = 4;
+        ATTEMPT_STATUS_5xx = 5;
+    }
+
+    message CrawlAttempt {
+        optional int64 ts = 1;
+        optional AttemptStatus status = 2;
+    }
+    
+    repeated CrawlAttempt crawl_attempts = 1;
+};

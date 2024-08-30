@@ -1,0 +1,10 @@
+FROM docker.io/library/contentv1-dev
+
+LABEL description="contentv1 prod image"
+
+COPY . /sources/contentv1
+RUN cd /sources/contentv1 && ./build/bin_build_release.sh && ./build/bin_install.sh
+
+WORKDIR /root
+
+ENTRYPOINT /bin/bash

@@ -1,0 +1,339 @@
+
+1. Хранение web (async) без индекса
+    - throwaway решение на одний машине: kafka, leveldb (монолит contentd)
+    Сгенерить датасет визитов [DONE]
+        Найти логи [DONE]
+        Загрузить дс в кафку [DONE]
+            поднять кафку локально [DONE]
+            load_ns_ds.js [DONE]
+                подключиться [DONE]
+                write kafka [DONE]
+                записать датасет [DONE]
+                    положить файлик с newsletter урлами [DONE]
+                    сгенерить распределение [DONE]
+                    убедиться что записано [DONE]
+                генерировать таймстампы url_visit [DONE]
+                сортировать по тс [DONE]
+    Рантайм
+        Scheduler
+            c++ helloworld [DONE]
+            test read kafka [DONE]
+                c++ rdkafka config [DONE]
+                    group.id [DONE]
+                    host kafka [DONE]
+                    topic unknown [DONE]
+            url_freq_map [DONE]
+                написать класс [DONE]
+                написать тест [DONE]
+                    написать обертку KafkaReader [DONE]
+                    занести simdjson [DONE]
+                    UrlVisitsReader [DONE]
+                    проверить url_freq_map на датасете [DONE]
+                        что удаляет [WONTDO] - скорее всего ок
+                        что возвращает топ [DONE]
+            занести robotstxt [DONE]
+                abseil dep [DONE]
+                update bazel to >=5 [DONE]
+                simple test [DONE]
+            конфиг [DONE]
+                jsoncpp from adser [DONE]
+                list all requiered fields and their types [DONE]
+            sched binary [DONE]
+            workd binary [DONE]
+            UrlFreqStats [DONE]
+            hostdb [DONE]
+                url parsing [DONE]
+                    занести ada [DONE]
+                    нормализация [DONE]
+                Robots.h [DONE]
+                Жизненный циклю урла [DONE]
+                    в частности robots.txt [DONE]
+                Сохранять robots leveldb [DONE]
+                Инстанцировать в Scheduler [DONE]
+                HostFreq [DONE]
+                    host_crawl_freq [DONE]
+                    host_enqueue_freq?
+                Лимиты Freq из конфига в hostdb [DONE]
+                    TsSlidWin [DONE]
+                    CrawlLimits parsing [DONE]
+                    "max_host_parallel_crawl" [DONE]
+                    "max_host_minute_crawl" [DONE]
+                    "max_host_hour_crawl" [DONE]
+                    "max_system_parallel_crawl" [DONE]
+            urldb [DONE]
+                из конфига таргеты CrawlTargets [DONE]
+                Url Meta
+                    proto [DONE]
+                        .proto [DONE]
+                        compile script [DONE]
+                    CrawlAttempts [DONE]
+                        test [DONE]
+                        serialize/deserialize [DONE]
+                        void UrlDb::loadCrawlAttempts() [DONE]
+                        thread flush changes every n sec (snapshots) [DONE]
+                        policy как качать урлы (в global queue) [DONE]
+                            сформулировать [DONE]
+                            закодить [DONE]
+                        понять причем здесь таргеты - выше в EnqueueLoop [DONE]
+                        Переделать на RWLock, здесь подходит [WONTDO]
+            Логирование [DONE]
+                занести date.h [DONE]
+                напечатать tp [DONE]
+            
+            UrlDb::UrlDaysDb [DONE]
+                config [DONE]
+                structs/proto [DONE]
+                UrlsDays [DONE]
+                    test [DONE]
+                    serialize/deserialize [DONE]
+                        UrlDays [DONE]
+                        UrlsDays [DONE]
+                        test [DONE]
+                rwlock [DONE]
+                thread [DONE]
+                test_url_days_db [DONE]
+                leveldb [DONE]
+                    load in constructor [DONE]
+                    snapshot thread [DONE]
+                test [DONE]
+            EnqLoop
+                Подбор топа урлов [DONE]
+                    написать драфт (бинпоиск) [DONE]
+                    протестить изолировано, когда есть UrlsDaysDb [DONE]
+                        Переписать UrlFreqMap с количеством событий [DONE]
+                        UrlFreqStats::getTopUrls rewrite with map (unique) [DONE]
+                            test UrlFreqStats [DONE]
+                        UrlFreqMap герметичный тест [DONE]
+                            Chrono test & fixes [DONE]
+                            Не удаляет старые события, починить [DONE]
+                        UrlFreqStats test & fixes [DONE]
+                        UrlsDays get method & test & fixes [DONE]
+                        UrlsDaysDb get method & test [DONE]
+                        Завести автоматическое тестирование (писать assert'ы в тестах) [DONE]
+                            Catch2 + Bazel https://stackoverflow.com/questions/52621760/how-to-set-up-catch2-in-bazel-project [DONE]
+                            Завести директорию [DONE]
+                            Занести библиотеку для тестирования [DONE]
+                            Вынести туда автотесты (не ручные) [DONE]
+                                001-005 [DONE]
+                                Починить Robots [DONE]
+                                UrlsDays [DONE]
+                                UrlsDaysDb [DONE]
+                                HostDb [DONE]
+                                    fix m_crawling_now big number (must be 0) [DONE]
+                                UrlDb
+                                    hangs? [DONE]
+                                    simple test [DONE]
+                                    test policy
+                                EnqueueLoop - выпотрошить его и проверить все по отдельности
+                                    EnqueueLoopTester
+                                        tests/common - типовой тестовый набор евентов [DONE]
+                                        инит EnqueueLoop - конфиг и тд [DONE]
+                                        simEvents [DONE]
+                                            примитивные тесты (до/после роботс) [DONE]
+                                            нагенерить кучу урлов и визитов [DONE]
+                                            проверить что достает топ [DONE]
+                                        testAfterState [DONE]
+                                        потыкать urldb и проверить топ [DONE]
+                                            возвращать вердикт [DONE]
+                                        бинпоиск не нужен, как нашли потолок, дальше отсекаем нужное количество [DONE]
+                MergeQueue - чтобы сделать шедулер быстрым [DONE]
+                    test (join 2 раза - плохо) [DONE]
+                    waitMerge [DONE]
+                UrlFreqStatsLF [DONE]
+                    Вынести тестер в ut [DONE]
+                    Шаблонизировать его [DONE]
+                    завести тест LF [DONE]
+                CrawledDb [DONE]
+                    - Поверх UrlsDaysDb, вместа урла событие (crawl result) [DONE]
+                        CrawledDb::saveResult получать numeric - static_cast<int> [DONE]
+                        в конфиг UrlsDaysDb MERGE_WAIT_SECS [DONE]
+                Time helpers [DONE]
+                EnqueueLoop::loop() [DONE]
+                Какой стейт? - все базы шедулера есть  [DONE]
+                (ENQUEUED - PENDING) problem [DONE]
+                KafkaWriter [DONE]
+                    тест чтения из другого контейнера [DONE]
+                    поправить логирование ошибок [DONE]
+                _checkEnqueue [DONE]
+                    - Решить как закидывать урлы в очередь [DONE]
+                    - верхняя логика [DONE]
+                     calcToEnqueue [DONE]
+                     timers [DONE]
+                     запись в кафку [DONE]
+
+            Scheduler.h - Выпотрошить и протестить
+                config file [DONE]
+                загружать в тесте [DONE]
+                инстанцировать шедулер [DONE]
+                    переделать конфиг - noncopy & validate(dbg) [DONE]
+                    Инстанцировать базы в шедулере [DONE]
+                    UrlDb leveldb !ok occasionally (mkdir -p) [FIXED]
+
+            LoadLoop [DONE]
+                завести test [DONE]
+                Проверить тайминги [WONTDO]
+                KafkaReaderMock [DONE]
+                    KafkaReader stop problem [DONE]
+                    Положить (генерить) в базел kafka_mock_visits.txt [DONE]
+                        И загрузить его в LoadLoopTester [DONE]
+                Восстановить загрузку в кафку датасета [DONE]
+                Проверить что LoadLoop пишет в UrlsDaysDb и UrlFreqStats [DONE]
+            Проверить что UrlFreqStats конструируется из UrlsDaysDb [DONE]
+            leveldb lock error in tests [DONE]
+                разные директории в тестах - сделать тесты герметичными [DONE]
+        Worker
+            ch merge queue [DONE]
+                затащить httpcli в кодобазу [DONE]
+                внедрить MQ [DONE]
+                    Cделать и протестить ChReqBatch (buildHttpReq) [DONE]
+                    (curl gnutls memory leak)
+                        Затащить актаульный curl [DONE]
+                fake server test [DONE]
+                    занести http сервер [DONE]
+            FetchLoop 
+                MergeQueue [DONE]
+                Shed call [DONE]
+                    push_vector_minus test [DONE]
+                Tester [DONE]
+                    instate FetchLoop [DONE]
+                    dry run [DONE]
+                    debug SIGSEGV (забыл new global_obj) [DONE]
+                        bazel test gdb https://groups.google.com/g/bazel-discuss/c/Mu95dnuA2MQ/m/xS7CmiquAgAJ - not worked
+                            junk test (catch2, bazel bin, wo bazel test) [DONE]
+                Класть в global_crawl_queue proto [DONE]
+                Положить GFQRecord в ReqBatch [DONE]
+                GFQRecordPb в SchedulerApi [DONE]
+                std::less for GFQRecordPb (GFQRecord) [DONE]
+                Протестить отстукивание onCrawled [DONE]
+                Протестить отстукивание onRobots [DONE]
+                Добавить отстукивание ошибок [DONE]
+        Как не заддосить /robots.txt ? [DONE]
+            Переделать алгоритм шедулера чтобы применять к роботс политики
+            - ничего не качать с сайта пока не было попытки роботс, дальше качать, роботс обновлять раз в день [DONE]
+                Протестить [DONE]
+        Скачать сайты newsletters
+          собрать contentd [DONE]
+            Scheduler API in Scheduler [DONE]
+                AttemptResult -> AttemptStatus [DONE]
+                FetchResult (in arch.txt) [DONE]
+                API -> vector<FetchResult> (buffer on client later) [DONE]
+                    virtual void onFetched(const std::vector<FetchResult> &_res) = 0; [DONE]
+                Implement API [DONE]
+                  host_db, url_db [DONE]
+                  CrawledDb::onFetched [DONE]
+            KafkaSim: pipe внутри процесса вместо топика [DONE]
+                    KafkaWriterMock [DONE]
+                    KafkaReaderMock [DONE]
+                    unit test [DONE]
+            Scheduler::tryFetchUrls  allowed: 0 [DONE]
+                HostDb::tryCrawl -> GFQRecord [DONE]
+            dry_run: прогнать тестовые данные без кафки [DONE]
+                Нашпиговать логов в шедулер [DONE]
+                EnqueueLoop::_calcHourTarget [WONTDO]
+                    fix get_hours_till_midnight [WONTDO]
+                contentd bazel ut: FetchStats != 0 on scheduler [DONE]
+                    hangs, figure out how finish threads [DONE]
+            Worker init [DONE]
+              cli [DONE]
+              напихать конфигов в зависимости воркера [DONE]
+                fetch_settings в конфиг [DONE]
+                gfq - kafka reader [DONE]
+            бинарь руками потрогать [DONE]
+            ut bazel test - чтобы собиралcя и хелп выводил [DONE]
+            PageDb [DONE]
+                impl [DONE]
+                integrate [DONE]
+            QueryThread/API
+                QueryLoop (Worker)
+                    Tester [DONE]
+                    Структурки для запросов [DONE]
+                        QueryGroup [DONE]
+                            dump/restore [DONE]
+                        QueryGroupHits [DONE]
+                            dump/restore [DONE]
+                    занести AhoCorasick [DONE]
+                    QueryDb [DONE]
+                    QueryGroupMatcherTest [DONE]
+                    QueryLoop
+                        QueryLoop::_query Test [DONE]
+                        Test with QG in QueryDb [DONE]
+                        Query interval in config [DONE]
+                            Test code from _loopImpl in ut_chrono [DONE]
+                        integrate with contentd [OVER API]
+                            dry run test [WONTDO]
+
+                API (Contentd)
+                  - https://developer.x.com/en/docs/authentication/oauth-2-0/bearer-tokens
+                    api/v1 dir [DONE]
+                    Tester [DONE]
+                    methods impl
+                        version [DONE]
+                        /token [DONE]
+                            header parsing [DONE]
+                            gen token [DONE]
+                            pers storage? [WONTDO]
+                            /check_token [DONE]
+                        auth [DONE]
+                        crypto hash [WONTDO]
+                            занести cryptopp [WONTDO]
+                        /get_query_groups_list [DONE]
+                        /set_query_group [DONE]
+                        /get_hits [DONE]
+                            починить дублирование хитов [DONE]
+                        /delete_query_group [DONE]
+                    Tests [DONE]
+                    integrate with contentd [DONE]
+                        Вынести pagedb на уровень contentd [DONE]
+                        Встроить API (QueryLoop) в contentd [DONE]
+
+        (prestable) выставить на сервере
+            fetch_doc_limit_size
+            Писать CrawledDb в общий лог раз в 10 сек
+                - никакая инфра не нужна, можно запускать
+
+        Написать доку для клиента
+            Только примеры curl запросов
+  
+          
+
+-----------------------------
+            Мониторинг верхних метрик
+            
+                test
+                Логгинг/Мониторинг                 
+            
+            remove ancors
+            filterEnqueue
+            LoadLoop
+                                            
+        Crawler-worker thread
+            pagedb
+            benchmark
+
+
+    Инфра!
+        - пока все просто, один хост и монолит
+        Локальные логи
+        Мониторинг (CH?)
+
+2. Интеграция
+    Посчитать требования ресурсов
+    Бенчмарки
+        Шедулер
+        Воркер
+        Сеть?
+
+3. Техдолг
+    rename db to ldb
+    FetchLoop - отстукивать 4xx 5xx, а не просто curlerror
+    remove redund UrlDbConfig::STR_URL_DB_PATH -> STR_DB_PATH
+    EnqueueLoop - push kafka batch
+    UrlsDaysDb std::move
+    hostdb передалать на RWLock
+    build/common.sh находить WORKSPACE
+    
+
+4. R&D
+    string_view?
+    (math) urldb - distribution visits -> crawl budgets buckets -> url recrawl periods
+

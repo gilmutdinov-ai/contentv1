@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.Greeter";
+//option java_outer_classname = "GreeterProto";
+//option objc_class_prefix = "GTR";
+//option go_package = "github.com/rules-proto-grpc/rules_proto_grpc/examples/proto";
+
+package contentv1;
+
+import "google/protobuf/any.proto";
+import "src/proto/GFQRecord.proto";
+import "src/proto/FetchResult.proto";
+
+/*
+см SchedulerApi
+
+способ позвать по сети
+
+virtual void tryFetchUrls(const std::vector<GFQRecord> &_try_urls,
+                            std::vector<GFQRecord> &_allowed_urls) = 0;
+virtual void onFetched(const std::vector<FetchResult> &_results) = 0;
+*/
+
+// service definition.
+service SchedulerRPC {
+
+    rpc TryFetchUrls (TryFetchRequest) returns (TryFetchReply) {}
+    rpc OnFetched (OnFetchedRequest) returns (OnFetchedReply) {}
+}
+
+message TryFetchRequest {
+  repeated GFQRecordPb try_urls = 1;
+}
+
+message TryFetchReply {
+  repeated GFQRecordPb allowed_urls = 1;
+}
+
+message OnFetchedRequest {
+  repeated FetchResultPb results = 1;
+};
+
+message OnFetchedReply {
+};

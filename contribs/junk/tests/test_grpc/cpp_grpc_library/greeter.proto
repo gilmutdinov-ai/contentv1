@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+//option java_multiple_files = true;
+//option java_package = "io.grpc.examples.Greeter";
+//option java_outer_classname = "GreeterProto";
+//option objc_class_prefix = "GTR";
+//option go_package = "github.com/rules-proto-grpc/rules_proto_grpc/examples/proto";
+
+package greeter;
+
+import "google/protobuf/any.proto";
+import "contribs/junk/tests/test_grpc/cpp_grpc_library/thing.proto";
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+  google.protobuf.Any payload = 2;
+  examples.proto.Thing thing = 3;
+}

@@ -1,0 +1,14 @@
+# BUILD.bazel
+proto_library(
+    name = "thing_proto",
+    srcs = ["thing.proto"],
+    deps = ["@com_google_protobuf//:any_proto"],
+)
+
+# BUILD.bazel
+load("@rules_proto_grpc_cpp//:defs.bzl", "cpp_proto_compile")
+
+cpp_proto_compile(
+    name = "cpp_proto_compile",
+    protos = [":thing_proto"],
+)

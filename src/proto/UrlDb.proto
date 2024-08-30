@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package contentv1;
+
+  enum EUrlCrawlDecisionPb {
+    ALLOW = 0;
+    DISALLOW_NO_URL = 1;
+    DISALLOW_NO_REASON = 2;
+    DISALLOW_TRY_IN_HOUR = 3;
+    DISALLOW_WAIT_X2_TIME = 4;
+    DISALLOW_TRY_IN_A_DAY = 5;
+    DISALLOW_TRY_IN_A_WEEK = 6;
+  };

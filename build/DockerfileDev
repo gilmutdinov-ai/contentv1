@@ -1,0 +1,84 @@
+FROM ubuntu:22.04
+
+LABEL description="contentv1 dev image"
+
+RUN apt-get update && apt-get install -y \
+    liblzma-dev \
+    git \
+    cmake \
+    make \
+    clang \
+    g++ \
+    build-essential \
+    libboost1.74-all-dev \
+    libjsoncpp-dev \
+    libcurl4-gnutls-dev \
+    libyaml-dev \
+    libyaml-cpp-dev \
+    libre2-dev \
+    gdb \
+    libpcre3-dev \
+    libuv1-dev \
+    curl \
+    wget \
+    net-tools \
+    inetutils-ping \
+    dnsutils \
+    vim \
+    redis-tools \
+    lsb-release \
+    python3 \
+    librdkafka-dev \
+    libsimdjson-dev \
+    libleveldb-dev \
+    # for scylla driver
+    libssl-dev 
+
+### BAZEL
+
+RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor >bazel-archive-keyring.gpg
+RUN mv bazel-archive-keyring.gpg /usr/share/keyrings
+RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
+
+RUN apt-get update && apt-get install -y bazel
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# --no-cache
+
+#RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+#RUN apk add bazel@testing
+
+#COPY artifacts /artifacts
+#COPY contribs /contribs
+
+RUN ldconfig
+
+# needs WORKSPACE file
+#RUN cd /contribs/junk && bazel fetch '@rules_cc//cc:*'
+#RUN cd /contribs/junk && bazel fetch '@rules_java//java:*'
+
+#RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && \
+#    echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config && \
+#    echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config && \
+#    ssh-keygen -A
+
+
+### nodejs (in scripts)
+
+SHELL ["bash", "-lc"]
+
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+RUN source ~/.nvm/nvm.sh && nvm install --lts
+
+### scylladb
+
+ADD ./contribs/scylla-cpp /contribs/scylla-cpp
+
+RUN cd /contribs/scylla-cpp && cmake -DCASS_BUILD_STATIC=ON  -DCASS_BUILD_SHARED=OFF . && make -j8 && make install
+
+# RUN apt-get install -y 
+
+ENTRYPOINT /bin/bash

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package contentv1;
+
+import "src/proto/CrawlAttempts.proto";
+import "src/proto/GFQRecord.proto";
+
+message FetchResultPb {
+    optional GFQRecordPb gfq = 1;
+    optional CrawlAttemptsPb.AttemptStatus status = 2;
+    optional string error_str = 3;
+    optional string content = 4;
+};

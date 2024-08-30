@@ -1,0 +1,12 @@
+*.o
+*.a
+.sconsign.dblite
+src/proto/*.h
+src/proto/*.cc
+data/ds/gened_visits_dataset.json
+infra/local/kafka/node_modules
+contribs/junk/tests/test_bazel/00/bazel*
+bazel*
+*.lock
+.vscode
+*package-lock.json

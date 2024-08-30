@@ -1,0 +1,30 @@
+[submodule "contribs/robotstxt"]
+	path = contribs/robotstxt
+	url = https://github.com/google/robotstxt.git
+[submodule "contribs/abseil-cpp"]
+	path = contribs/abseil-cpp
+	url = https://github.com/abseil/abseil-cpp.git
+[submodule "contribs/ada"]
+	path = contribs/ada
+	url = https://github.com/ada-url/ada
+[submodule "contribs/concurrentqueue"]
+	path = contribs/concurrentqueue
+	url = https://github.com/cameron314/concurrentqueue.git
+[submodule "contribs/date"]
+	path = contribs/date
+	url = https://github.com/HowardHinnant/date.git
+[submodule "contribs/cpp-httplib"]
+	path = contribs/cpp-httplib
+	url = https://github.com/yhirose/cpp-httplib.git
+[submodule "contribs/aho_corasick"]
+	path = contribs/aho_corasick
+	url = https://github.com/gilmutdinov-ai/aho_corasick.git
+[submodule "contribs/cryptopp"]
+	path = contribs/cryptopp
+	url = https://github.com/weidai11/cryptopp.git
+[submodule "contribs/scylla-cpp"]
+	path = contribs/scylla-cpp
+	url = https://github.com/scylladb/cpp-driver.git
+[submodule "src/misc"]
+	path = src/misc
+	url = https://github.com/gilmutdinov-ai/misc.git

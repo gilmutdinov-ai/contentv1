@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  scylla-contentv1:
+    image: scylladb/scylla:6.0.0
+    #entrypoint: /bin/bash
+    command: "& /usr/sbin/sysctl -w kern.aiomax=1048576 & /usr/sbin/sysctl -w fs.aio-max-nr=1048576 & wait"
+    networks:
+      - contentv1_network
+    restart: always
+    #    ports:
+    #      - "9042:9042" # CQL
+    #      - "9160:9160" # Thrift
+    #      - "10000:10000" # REST
+    volumes:
+      - "./scylla/scylla.yaml:/etc/scylla/scylla.yaml"
+      - "./scylla/cassandra-rackdc.properties.dc1:/etc/scylla/cassandra-rackdc.properties"
+      - "./scylla/mutant-data.txt:/mutant-data.txt"
+networks:
+  contentv1_network:
+    name: contentv1_network
+    external: true

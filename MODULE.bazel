@@ -1,0 +1,20 @@
+###############################################################################
+# Bazel now uses Bzlmod by default to manage external dependencies.
+# Please consider migrating your external dependencies from WORKSPACE to MODULE.bazel.
+#
+# For more details, please check https://github.com/bazelbuild/bazel/issues/18958
+###############################################################################
+
+bazel_dep(name = "abseil-cpp", version = "20230802.0.bcr.1")
+
+bazel_dep(name = "rules_proto_grpc_cpp", version = "5.0.0")
+bazel_dep(name = "toolchains_protoc", version = "0.3.1")
+
+# Prevent version skew by matching protoc version to protobuf version, as C++ is the only lang that
+# has no cross-version runtime guarantee:
+# https://protobuf.dev/support/cross-version-runtime-guarantee/#cpp
+protoc = use_extension("@toolchains_protoc//protoc:extensions.bzl", "protoc")
+protoc.toolchain(
+    google_protobuf = "com_google_protobuf",
+    version = "v27.1",
+)

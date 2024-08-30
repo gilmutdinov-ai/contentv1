@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package contentv1;
+
+// Global Fetch Queue (topic: global_fetch_queue)
+message GFQRecordPb {
+    
+    optional string url = 1;
+    optional int64 attempt_ts = 2;
+};

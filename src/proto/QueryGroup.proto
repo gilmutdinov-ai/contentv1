@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package contentv1;
+
+message QueryGroupPb {
+    optional string gid = 1;
+    repeated string queries = 2;
+};
+
+message QueryGroupHitsPb {
+    optional string gid = 1;
+    repeated string hits = 2;
+};

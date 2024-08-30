@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package contentv1;
+
+message UrlDaysPb {
+    message UrlDays {
+        optional string day_str = 1;
+        optional int64 visits = 2;
+    }
+    
+    optional string url = 1;
+    repeated UrlDays url_days = 2;
+};
