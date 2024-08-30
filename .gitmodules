@@ -28,3 +28,6 @@
 [submodule "src/misc"]
 	path = src/misc
 	url = https://github.com/gilmutdinov-ai/misc.git
+[submodule "contribs/cpp-driver"]
+	path = contribs/cpp-driver
+	url = https://github.com/scylladb/cpp-driver.git

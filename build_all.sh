@@ -1,5 +1,7 @@
-#!/bin/bash
+
 set -e
+
+source "$(dirname "$0")/build/common.sh"
 
 # run in dev container build/run_shell_docker.sh
 #  built with build/docker_build_dev_image.sh
