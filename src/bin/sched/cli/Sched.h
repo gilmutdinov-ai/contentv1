@@ -52,7 +52,5 @@ public:
 
 private:
   CliAction _parseArgs(int argc, char **argv);
-
-  friend class Sched;
 };
 } // namespace contentv1

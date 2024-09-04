@@ -29,7 +29,7 @@
                 Сервер: try/catch логирование [DONE]
             Протестить [DONE]
 
-Занести ScyllaDB
+Занести ScyllaDB [DONE]
     Клонировать драйвер [DONE]
     Поднять в scylla в docker-compose
         Прибить - было в stack [DONE]
@@ -67,7 +67,10 @@
             В cli
             В конфиг
         Вынести в конфиг PageDb: lvldb/scylla
-
+        Написать конфиг [DONE]
+        Собрать [DONE]
+    Поднять кафку локально
+    Протестить
 
 Панель метрик Grafana
     Занести clickhouse
@@ -76,6 +79,8 @@
         Подключиться из С++
         Внедрить сбор метрик из приложения
     Занести Grafana
+
+kubernetes
 
 Техдолг
     Занести все базы в поддир db/ifs db/scylla db/lvl
