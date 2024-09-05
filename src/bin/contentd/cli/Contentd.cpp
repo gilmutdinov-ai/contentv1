@@ -30,13 +30,13 @@ int Contentd::operator()(int argc, char **argv) {
   LOG("Config parsed successfully");
   if (m_is_dry_run)
     LOG("performing dry run..");
-  if (m_is_under_bazel)
-    LOG("running under bazel..");
+  if (m_is_under_bazel_test)
+    LOG("running under bazel test..");
 
   // SCHEDULER
   LOG("Init scheduler..");
   m_scheduler.reset(
-      new Scheduler{contentd_config, m_is_dry_run, m_is_under_bazel});
+      new Scheduler{contentd_config, m_is_dry_run, m_is_under_bazel_test});
   LOG("Init scheduler..DONE");
 
   if (m_is_dry_run) {
@@ -136,9 +136,9 @@ Contentd::CliAction Contentd::_parseArgs(int argc, char **argv) {
     return DRY_RUN;
   }
 
-  m_is_under_bazel = false;
+  m_is_under_bazel_test = false;
   if (vm.count("bazel_test")) {
-    m_is_under_bazel = true;
+    m_is_under_bazel_test = true;
   }
 
   return NORMAL_RUN;

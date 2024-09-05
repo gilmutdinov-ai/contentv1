@@ -4,7 +4,6 @@
 #include "misc/Strings.h"
 #include <iostream>
 
-
 namespace contentv1 {
 
 APIv1Config::APIv1Config() {

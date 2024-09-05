@@ -31,6 +31,7 @@ public:
   inline static const std::string INT_LISTEN_PORT{"apiv1_listen_port"};
 
   APIv1Config();
+  virtual ~APIv1Config() = default;
 };
 
 class APIv1 {

@@ -20,19 +20,17 @@ public:
   inline static const std::string ARR_KAFKA_BROKERS{"fetch_kafka_brokers"};
   inline static const std::string STR_KAFKA_GROUP_ID{"fetch_kafka_group_id"};
 
-  WorkerConfig() {
-    addArrays({ARR_KAFKA_BROKERS});
-    addStrings({STR_FETCH_TOPIC, STR_KAFKA_GROUP_ID});
-  }
+  virtual ~WorkerConfig() = default;
+  WorkerConfig();
 };
 
 class Worker {
-  // std::unique_ptr<QueryLoop> m_query_loop;
-  // std::unique_ptr<std::thread> m_query_th;
+
+  IPageDb::Ptr m_page_db;
 
   SchedulerApi::Ptr m_scheduler_api;
   misc::KafkaReader::Ptr m_kafka_reader;
-  IPageDb::Ptr m_page_db;
+
   FetchLoop::Ptr m_fetch_loop;
   std::unique_ptr<std::thread> m_fetch_th;
 

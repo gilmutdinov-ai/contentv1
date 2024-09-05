@@ -15,6 +15,7 @@ private:
 
 public:
   CrawlTargetsConfig();
+  virtual ~CrawlTargetsConfig() = default;
 };
 
 struct CrawlTargets {

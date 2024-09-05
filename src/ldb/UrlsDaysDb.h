@@ -50,10 +50,8 @@ private:
                                             INT_MERGE_INTERVAL_SECS};
 
 public:
-  UrlsDaysDbConfig() {
-    addStrings(s_cfg_strs);
-    addInts(s_cfg_ints);
-  }
+  UrlsDaysDbConfig();
+  virtual ~UrlsDaysDbConfig() = default;
 };
 
 class UrlsDaysDb {

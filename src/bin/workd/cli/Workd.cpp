@@ -7,6 +7,8 @@
 
 namespace contentv1 {
 
+WorkdConfig::WorkdConfig() { addStrings({STR_SCHED_GRPC_TARGET_STR}); }
+
 Workd::~Workd() { LOG("~Workd() start/finish"); }
 
 int Workd::operator()(int argc, char **argv) {
@@ -31,22 +33,26 @@ int Workd::operator()(int argc, char **argv) {
   LOG("Config parsed successfully");
   if (m_is_dry_run)
     LOG("performing dry run..");
-  if (m_is_under_bazel)
-    LOG("running under bazel..");
+  if (m_is_under_bazel_test)
+    LOG("running under bazel test..");
 
   // PAGE DB SCYLLA
   m_page_db.reset(new PageDbScylla{workd_config});
 
-  // SCHEDULER CLEINT (RPC)
-#warning IMPLEMENT
+  // SCHEDULER CLIENT (RPC)
+  {
+    std::string target_str =
+        workd_config[WorkdConfig::STR_SCHED_GRPC_TARGET_STR].asString();
+    m_scheduler_client.reset(new SchedulerClient(
+        grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())));
+  }
   // WORKER
-#warning IMPLEMENT
-  /*
-  LOG("Init scheduler..");
-  m_scheduler.reset(
-      new Scheduler{sched_config, m_is_dry_run, m_is_under_bazel});
-  LOG("Init scheduler..DONE");
-  */
+  LOG("Init worker..");
+  m_worker.reset(
+      new Worker(m_page_db, m_scheduler_client, workd_config, m_is_dry_run));
+
+  LOG("Init worker..DONE");
+
   /*
     if (m_is_dry_run) {
       // Waiting for Scheduler to push something to queue (KafkaStaticSim)
@@ -123,9 +129,9 @@ Workd::CliAction Workd::_parseArgs(int argc, char **argv) {
     return DRY_RUN;
   }
 
-  m_is_under_bazel = false;
+  m_is_under_bazel_test = false;
   if (vm.count("bazel_test")) {
-    m_is_under_bazel = true;
+    m_is_under_bazel_test = true;
   }
 
   return NORMAL_RUN;

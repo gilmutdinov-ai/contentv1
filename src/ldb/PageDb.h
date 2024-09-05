@@ -17,6 +17,7 @@ private:
 
 public:
   PageDbConfig();
+  virtual ~PageDbConfig() = default;
 };
 
 class PageDb final : public IPageDb {

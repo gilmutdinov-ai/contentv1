@@ -3,6 +3,11 @@
 
 namespace contentv1 {
 
+UrlsDaysDbConfig::UrlsDaysDbConfig() {
+  addStrings(s_cfg_strs);
+  addInts(s_cfg_ints);
+}
+
 UrlsDaysDb::UrlsDaysDb(const UrlsDaysDbConfig &_config)
     : m_db_path{_config[UrlsDaysDbConfig::STR_URLS_DAYS_DB_PATH].asString()},
       m_snapshot_interval_secs{

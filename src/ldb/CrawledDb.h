@@ -30,10 +30,8 @@ private:
       INT_CRAWLED_DB_SNAPSHOT_INTERVAL_SECS};
 
 public:
-  CrawledDbConfig() {
-    addStrings(s_cfg_strs);
-    addInts(s_cfg_ints);
-  }
+  CrawledDbConfig();
+  virtual ~CrawledDbConfig() = default;
 };
 
 class CrawledDb {

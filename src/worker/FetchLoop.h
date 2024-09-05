@@ -111,7 +111,7 @@ private:
   //// called from switchGlobalObj
   void _sendToCurl(ReqBatch *_a) {
 
-    auto now_ts = misc::to_int64(misc::get_now());
+    //    auto now_ts = misc::to_int64(misc::get_now());
     while (!_a->empty()) {
       std::vector<GFQRecord> try_urls;
       auto batch_size = _a->getReqs(m_max_requests_in_batch, try_urls);

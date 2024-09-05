@@ -25,7 +25,8 @@ private:
       INT_MAX_SYSTEM_PARALLEL_CRAWL};
 
 public:
-  CrawlLimitsConfig() { addInts(s_cfg_ints); }
+  CrawlLimitsConfig();
+  virtual ~CrawlLimitsConfig() = default;
 };
 
 struct CrawlLimits {

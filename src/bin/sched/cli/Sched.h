@@ -11,6 +11,7 @@ class SchedConfig : public virtual SchedulerConfig,
                     public virtual PageDbScyllaConfig,
                     public virtual APIv1WrapConfig {
 public:
+  virtual ~SchedConfig() = default;
 };
 
 class Sched {
@@ -24,7 +25,7 @@ class Sched {
 
   std::string m_config_path = "src/bin/sched/cli/ut/sched_ut.conf";
   bool m_is_dry_run = false;
-  bool m_is_under_bazel = false;
+  bool m_is_under_bazel_test = false;
 
   // SCHEDULER
   Scheduler::Ptr m_scheduler;

@@ -16,10 +16,12 @@ public:
 };
 
 class QueryLoop {
+
+  std::atomic<bool> m_running{true};
+
   QueryDb::Ptr m_query_db;
   IPageDb::Ptr m_page_db;
 
-  std::atomic<bool> m_running{true};
   int m_query_interval_sec;
 
   std::atomic<int64_t> m_cycles_count{0};

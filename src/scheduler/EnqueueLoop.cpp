@@ -58,7 +58,7 @@ void EnqueueLoop::_waitTillEndOfHour() {
 
 Cnt EnqueueLoop::_calcHourTarget() {
 
-  auto till_day_end = misc::get_now() - misc::get_day_end();
+  // auto till_day_end = misc::get_now() - misc::get_day_end();
   Cnt crawled_today = m_crawled_db->getFinishedToday();
   LOG("crawled_today: " << crawled_today);
   auto left_crawl_today = m_targets.target_day_crawl - crawled_today;

@@ -52,6 +52,7 @@ private:
 
 public:
   SchedulerConfig();
+  virtual ~SchedulerConfig() = default;
   //  SchedulerConfig(const std::string &fn);
 };
 

@@ -29,6 +29,7 @@ private:
 
 public:
   HostDbConfig();
+  virtual ~HostDbConfig() = default;
 };
 
 class HostDb {

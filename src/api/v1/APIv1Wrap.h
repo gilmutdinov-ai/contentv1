@@ -12,6 +12,7 @@ class APIv1WrapConfig : public virtual APIv1Config,
                         public virtual QueryLoopConfig,
                         public virtual QueryDbConfig {
 public:
+  virtual ~APIv1WrapConfig() = default;
 };
 
 class APIv1Wrap {

@@ -27,6 +27,7 @@ protected:
 
 public:
   UrlDbConfig();
+  virtual ~UrlDbConfig() = default;
 };
 
 /*

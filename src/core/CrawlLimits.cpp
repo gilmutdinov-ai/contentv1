@@ -2,6 +2,8 @@
 
 namespace contentv1 {
 
+CrawlLimitsConfig::CrawlLimitsConfig() { addInts(s_cfg_ints); }
+
 CrawlLimits::CrawlLimits(const CrawlLimitsConfig &_cfg) {
   max_host_parallel_crawl = _cfg["sched_max_host_parallel_crawl"].asInt();
   max_host_minute_crawl = _cfg["sched_max_host_minute_crawl"].asInt();

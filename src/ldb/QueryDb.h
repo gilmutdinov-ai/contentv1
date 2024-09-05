@@ -17,6 +17,7 @@ private:
 
 public:
   QueryDbConfig();
+  virtual ~QueryDbConfig() = default;
 };
 
 class QueryDb {

@@ -3,6 +3,11 @@
 
 namespace contentv1 {
 
+CrawledDbConfig::CrawledDbConfig() {
+  addStrings(s_cfg_strs);
+  addInts(s_cfg_ints);
+}
+
 CrawledDb::CrawledDb(const CrawledDbConfig &_config) {
 
   // it works :-)
