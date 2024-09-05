@@ -56,21 +56,27 @@
         Переписать PageDb [DONE]
         
 Микросервисы
-    Завести bin/sched
-        Добавить PageDbScylla
-        Добавить SchedulerServer
-            В cli
-            В конфиг
-    Завести bin/workd
-        Добавить PageDbScylla
-        Добавить SchedulerClient
-            В cli
-            В конфиг
-        Вынести в конфиг PageDb: lvldb/scylla
+    Завести bin/sched [DONE]
+        Добавить PageDbScylla [DONE]
+        Добавить SchedulerServer [DONE]
+            В cli [DONE]
+            В конфиг [DONE]
+    Завести bin/workd [DONE]
+        Добавить PageDbScylla [DONE]
+        Добавить SchedulerClient [DONE]
+            В cli [DONE]
+            В конфиг [DONE]
+        Вынести в конфиг PageDb: lvldb/scylla [WONTDO]
         Написать конфиг [DONE]
         Собрать [DONE]
-    Поднять кафку локально
-    Протестить
+    Поднять кафку локально [DONE]
+    Bazel remote cache контейнер в contentv1_network
+         - https://bazel.build/remote/caching
+    Протестить микросервисы
+        sched пишет в кафку
+        workd читает из кафки
+        workd ходит в sched
+        workd сохраняет контент в scylla
 
 Панель метрик Grafana
     Занести clickhouse

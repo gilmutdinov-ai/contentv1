@@ -9,7 +9,7 @@ services:
       - 22181:2181
     networks:
       - contentv1_network
-  
+
   kafka:
     image: confluentinc/cp-kafka:7.4.4
     depends_on:
