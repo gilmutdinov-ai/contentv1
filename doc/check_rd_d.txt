@@ -70,8 +70,11 @@
         Написать конфиг [DONE]
         Собрать [DONE]
     Поднять кафку локально [DONE]
-    Bazel remote cache контейнер в contentv1_network
-         - https://bazel.build/remote/caching
+    Bazel cache for faster builds [DONE]
+         https://bazel.build/remote/caching [WONTDO]
+         ~/.cache/bazel mount from host [DONE]
+            - тормозит https://stackoverflow.com/questions/64629569/docker-bind-mount-directory-vs-named-volume-performance-comparison
+         сделать named volume [DONE]
     Протестить микросервисы
         sched пишет в кафку
         workd читает из кафки
@@ -96,3 +99,8 @@ kubernetes
         Перенести из WORKSPACE в bzlmod
             https://bazel.build/external/migration
     
+Bazel for airgapped env (repo cache) [LATER]
+        fetch скрипт
+            сделать mirror [WAITING] <----------
+        проверить что contentd собирается
+        подставить в остальные build скрипты

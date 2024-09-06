@@ -1,0 +1,7 @@
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "make")
+
+make(
+    name = "hellomake",
+    lib_source = "@hellomake//:all_srcs",
+    out_static_libs = ["hellomake.a"],
+)
