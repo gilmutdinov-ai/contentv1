@@ -76,9 +76,11 @@
             - тормозит https://stackoverflow.com/questions/64629569/docker-bind-mount-directory-vs-named-volume-performance-comparison
          сделать named volume [DONE]
     Протестить микросервисы
-        сделать контейнер для шелла сциллы
+        сделать контейнер для шелла сциллы [WONTDO]
+            - подключаемся из бегущего как и к кафке
         проверить руками (работает, если):
             sched пишет в кафку
+                проверить алгоритм EnqueueLoop, что-то не то с часами до конца дня и m_crawled_db->inProgress
             workd читает из кафки
             workd ходит в sched
             workd сохраняет контент в scylla
