@@ -1,0 +1,11 @@
+
+Как поднять шедулер
+
+    1. Подключиться в контейнере сциллы к ней через
+        cqlsh
+    2. Создать кейспейс и таблицу для dev env
+        src/scylla/schema.txt
+    3. В контейнере кафки читаем и печатаем gfq:
+        /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic global_fetch_queue --from-beginning
+    4. Запускаем шедулер
+        build/sched_dry_run.sh

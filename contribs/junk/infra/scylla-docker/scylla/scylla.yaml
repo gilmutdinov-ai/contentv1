@@ -405,9 +405,9 @@ partitioner: org.apache.cassandra.dht.Murmur3Partitioner
 # On the other hand, since writes are almost never IO bound, the ideal
 # number of "concurrent_writes" is dependent on the number of cores in
 # your system; (8 * number_of_cores) is a good rule of thumb.
-# concurrent_reads: 32
-# concurrent_writes: 32
-# concurrent_counter_writes: 32
+concurrent_reads: 8
+concurrent_writes: 8
+concurrent_counter_writes: 8
 
 # Total memory to use for sstable-reading buffers.  Defaults to
 # the smaller of 1/4 of heap or 512MB.
@@ -599,7 +599,7 @@ commitlog_total_space_in_mb: -1
 # 
 # If your data directories are backed by SSD, you should increase this
 # to the number of cores.
-#concurrent_compactors: 1
+concurrent_compactors: 1
 
 # Throttles compaction to the given total throughput across the entire
 # system. The faster you insert data, the faster you need to compact in

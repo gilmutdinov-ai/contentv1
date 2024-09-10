@@ -5,7 +5,7 @@ PageDbScyllaTester::PageDbScyllaTester() {
 
   PageDbScyllaConfig cfg;
 
-  std::string hosts{"10.0.1.2"};
+  std::string hosts{"scylla-docker-scylla-contentv1-1"};
 
   cfg[PageDbScyllaConfig::STR_SCYLLA_HOSTS].append(hosts);
   cfg.onParsed();

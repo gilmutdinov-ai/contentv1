@@ -14,9 +14,9 @@
 namespace contentv1 {
 
 /*
-    Задача - дернуть target_day_crawl в сутки с любым результатом
-       имеем target_day_crawl из него выводим
-        target_hour_crawl на основе
+  Задача - дернуть target_day_crawl в сутки с любым результатом, для этого
+  EnqueueLoop закидывает в global_fetch_queue урлы в нужном количестве. Имеем
+   target_day_crawl из него выводим target_hour_crawl на основе
           - (now - day_end)
           - (target_day_crawl - crawled_today)
         to_enqueue_now_count
