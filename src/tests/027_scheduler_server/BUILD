@@ -5,7 +5,7 @@ cc_test(
     copts = ["-Isrc/"],
     deps = [
         "@catch2//:catch2_main",
-        "//src/scheduler/ut"
+        "//src/scheduler/default/ut"
     ],
     visibility = ["//visibility:public"]
 )

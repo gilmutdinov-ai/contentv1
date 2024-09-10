@@ -1,7 +1,7 @@
 #pragma once
 
 #include "api/v1/APIv1Wrap.h"
-#include "scheduler/Scheduler.h"
+#include "scheduler/default/Scheduler.h"
 #include "scheduler/rpc/SchedulerServer.h"
 #include "scylla/PageDbScylla.h"
 

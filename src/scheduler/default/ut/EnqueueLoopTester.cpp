@@ -1,4 +1,4 @@
-#include "scheduler/ut/EnqueueLoopTester.h"
+#include "scheduler/default/ut/EnqueueLoopTester.h"
 #include "misc/Time.h"
 #include "misc/kafkawrap/KafkaWriterMock.h"
 #include "tests/common/robots_str.h"

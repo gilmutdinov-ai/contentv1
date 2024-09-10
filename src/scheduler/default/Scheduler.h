@@ -6,9 +6,9 @@
 #include "ldb/UrlDb.h"
 #include "ldb/UrlsDaysDb.h"
 #include "misc/Config.h"
-#include "scheduler/EnqueueLoop.h"
 #include "scheduler/IScheduler.h"
-#include "scheduler/LoadLoop.h"
+#include "scheduler/default/EnqueueLoop.h"
+#include "scheduler/default/LoadLoop.h"
 #include <thread>
 
 /*

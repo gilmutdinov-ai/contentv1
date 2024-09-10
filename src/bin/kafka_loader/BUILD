@@ -4,7 +4,7 @@ cc_binary(
         "main.cpp"
     ],
     deps = [
-        "//src/scheduler",
+        "//src/scheduler/default",
         "//src/kafkawrap",
         "//src/misc",
         "//src/tests/common"

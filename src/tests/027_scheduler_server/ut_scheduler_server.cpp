@@ -1,6 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
-#include "scheduler/ut/SchedulerServerTester.h"
+#include "scheduler/default/ut/SchedulerServerTester.h"
 #include <filesystem>
 #include <iostream>
 

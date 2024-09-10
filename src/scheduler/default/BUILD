@@ -3,16 +3,22 @@ package(
 )
 
 cc_library(
-    name = "scheduler",
+    name = "default",
     srcs = [
-        "SchedulerStub.cpp"
+        "EnqueueLoop.cpp",
+        "EnqueueLoopFilter.cpp",
+        "EnqueueLoopState.cpp",
+        "LoadLoop.cpp",
+        "Scheduler.cpp"
     ],
     hdrs = [
-        "IScheduler.h",
-        "SchedulerStub.h"
+        "EnqueueLoop.h",
+        "LoadLoop.h",
+        "Scheduler.h"
     ],
     visibility = ["//visibility:public"],
     deps = [
+        "//src/scheduler",
         "//src/core",
         "//src/ldb",
         "//src/misc",

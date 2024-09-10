@@ -38,7 +38,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//src/scheduler",
+        "//src/scheduler/default",
         "//src/scheduler/rpc:scheduler_grpc",
     ],
     copts = ["-Isrc/"]

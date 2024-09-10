@@ -1,5 +1,5 @@
 #pragma once
-#include "scheduler/Scheduler.h"
+#include "scheduler/default/Scheduler.h"
 #include "scheduler/rpc/SchedulerClient.h"
 #include "scheduler/rpc/SchedulerServer.h"
 
@@ -14,7 +14,7 @@ public:
 class SchedulerServerTester {
 
   inline static const std::string s_conf_rel_path{
-      "/src/scheduler/ut/scheduler_srv_ut.conf"};
+      "/src/scheduler/default/ut/scheduler_srv_ut.conf"};
 
   inline static uint16_t s_port;
   inline static uint16_t s_port_start = 8083;

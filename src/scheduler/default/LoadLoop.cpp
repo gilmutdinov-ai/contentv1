@@ -1,4 +1,4 @@
-#include "scheduler/LoadLoop.h"
+#include "scheduler/default/LoadLoop.h"
 #include "kafkawrap/UrlVisitsReader.h"
 
 namespace contentv1 {

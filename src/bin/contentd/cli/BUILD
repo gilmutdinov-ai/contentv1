@@ -9,7 +9,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//src/scheduler",
+        "//src/scheduler/default",
         "//src/worker",
         "//src/api/v1"
     ],

@@ -20,7 +20,7 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@catch2//:catch2_main",
-        "//src/scheduler",
+        "//src/scheduler/default",
         "//src/scheduler/rpc:scheduler_server",
         "//src/tests/common",
         "//data/ds"

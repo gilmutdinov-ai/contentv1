@@ -1,12 +1,12 @@
 #pragma once
-#include "scheduler/LoadLoop.h"
+#include "scheduler/default/LoadLoop.h"
 
 namespace contentv1 {
 
 class LoadLoopTester {
 
   inline static const std::string s_conf_rel_path{
-      "/src/scheduler/ut/load_loop_ut.conf"};
+      "/src/scheduler/default/ut/load_loop_ut.conf"};
 
   inline static const std::string s_gened_visits_dataset_rel_path{
       "/data/ds/gened_visits_dataset.json"};

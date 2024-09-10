@@ -4,7 +4,7 @@
 #include "misc/Strings.h"
 #include "misc/kafkawrap/KafkaReaderMock.h"
 #include "misc/kafkawrap/KafkaWriter.h"
-#include "scheduler/Scheduler.h"
+#include "scheduler/default/Scheduler.h"
 #include "tests/common/test_datasets.h"
 
 using namespace contentv1;

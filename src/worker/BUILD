@@ -18,7 +18,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//src/scheduler",
+        "//src/scheduler/default",
         "//src/misc/httpcli",
         "@jsoncpp//:jsoncpp"
     ],

@@ -1,7 +1,7 @@
-#include "scheduler/ut/LoadLoopTester.h"
+#include "scheduler/default/ut/LoadLoopTester.h"
 #include "misc/Bazel.h"
 #include "misc/kafkawrap/KafkaReaderMock.h"
-#include "scheduler/Scheduler.h"
+#include "scheduler/default/Scheduler.h"
 #include <catch2/catch_test_macros.hpp>
 #include <filesystem>
 
