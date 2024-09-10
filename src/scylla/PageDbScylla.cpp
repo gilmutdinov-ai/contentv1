@@ -54,7 +54,7 @@ void PageDbScylla::scanFull(ScanPageCb _cb) {
   try {
     fullScanWebPages(m_session, _cb);
   } catch (std::exception &_ex) {
-    LOG(_ex.what());
+    LOG("scanFull" << _ex.what());
   }
 }
 

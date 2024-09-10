@@ -4,6 +4,7 @@
 #include "misc/Log.h"
 #include "misc/kafkawrap/KafkaReaderMock.h"
 #include "misc/kafkawrap/KafkaWriterMock.h"
+#include "tests/common/test_datasets.h"
 #include <functional>
 
 namespace contentv1 {
@@ -15,7 +16,7 @@ SchedulerConfig::SchedulerConfig() {
 }
 
 Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
-                     bool _in_bazel)
+                     bool _in_bazel_test, bool _mock_kafka)
     : m_dry_run(_dry_run) {
 
   _config.validate("Scheduler::Scheduler");
@@ -30,13 +31,13 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
   m_crawled_db.reset(new CrawledDb{_config});
   LOG("Init scheduler's db's done");
 
-  if (_dry_run) {
+  if (_mock_kafka) {
     std::string dataset_path = "." + s_gened_visits_dataset_rel_path;
-    if (_in_bazel)
+    if (_in_bazel_test)
       dataset_path =
           misc::get_bazel_test_data_path(s_gened_visits_dataset_rel_path);
 
-    LOG("Loading dataset for dry run: " << dataset_path);
+    LOG("Loading dataset for mock kafka: " << dataset_path);
 
     auto gened_visits_dataset =
         misc::KafkaReaderMock::loadNewlineFile(dataset_path);

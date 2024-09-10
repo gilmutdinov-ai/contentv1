@@ -26,8 +26,13 @@ SchedulerServerTester::SchedulerServerTester() {
   m_cfg.parse(config_path);
   // std::cout << cfg.help() << std::endl;
   m_cfg.validate();
-  bool dry_run = true;
-  m_scheduler.reset(new Scheduler{m_cfg, dry_run}); //
+  {
+    constexpr bool dry_run = true;
+    constexpr bool in_bazel_test = true;
+    constexpr bool kafka_mock = true;
+    m_scheduler.reset(
+        new Scheduler{m_cfg, dry_run, in_bazel_test, kafka_mock}); //
+  }
 
   // INIT SERVER
   s_port = s_port_start + rand() % s_port_rnd_range;

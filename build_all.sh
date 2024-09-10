@@ -8,5 +8,6 @@ source "$(dirname "$0")/build/common.sh"
 
 build/run_all_tests.sh
 build/build_contentd.sh
+build/build_kafka_loader.sh
 build/build_sched.sh
 build/build_workd.sh

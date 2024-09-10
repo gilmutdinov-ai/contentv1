@@ -79,8 +79,17 @@
         сделать контейнер для шелла сциллы [WONTDO]
             - подключаемся из бегущего как и к кафке
         проверить руками (работает, если):
+            sched читает UrlVisit из кафки [DONE]
             sched пишет в кафку
-                проверить алгоритм EnqueueLoop, что-то не то с часами до конца дня и m_crawled_db->inProgress
+                - проверить алгоритм EnqueueLoop, что-то не то с - часами до конца дня и m_crawled_db->inProgress
+                - c этим вроде норм:
+                разделить dry_run и mock_kafka в шедулере [DONE]
+                сделать бинарь для загрузки датасета в кафку [DONE]
+                написать инструкцию с командами [DONE]
+                Scheduler:76 loadLoop impl hangs in dry run 
+                проверить
+
+
             workd читает из кафки
             workd ходит в sched
             workd сохраняет контент в scylla

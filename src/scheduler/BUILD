@@ -27,7 +27,9 @@ cc_library(
         
         "//src/kafkawrap",
         "//src/proto",
-        "@jsoncpp//:jsoncpp"
+        "@jsoncpp//:jsoncpp",
+
+        "//src/tests/common"
     ],
     copts = [
         "-Isrc/"

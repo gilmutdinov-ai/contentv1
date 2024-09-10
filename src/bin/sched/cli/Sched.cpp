@@ -34,8 +34,9 @@ int Sched::operator()(int argc, char **argv) {
 
   // SCHEDULER
   LOG("Init scheduler..");
-  m_scheduler.reset(
-      new Scheduler{sched_config, m_is_dry_run, m_is_under_bazel_test});
+  constexpr bool mock_kafka = false;
+  m_scheduler.reset(new Scheduler{sched_config, m_is_dry_run,
+                                  m_is_under_bazel_test, mock_kafka});
   LOG("Init scheduler..DONE");
   /*
     if (m_is_dry_run) {

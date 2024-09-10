@@ -81,9 +81,6 @@ class Scheduler : public SchedulerApi {
 
   Cnt m_loaded_uts_count{0};
 
-  inline static const std::string s_gened_visits_dataset_rel_path{
-      "/data/ds/gened_visits_dataset.json"};
-
   // fetch stats
   std::atomic<long> m_success_count{0};
   std::atomic<long> m_fail_count{0};
@@ -98,7 +95,7 @@ public:
   using Ptr = std::shared_ptr<Scheduler>;
 
   Scheduler(const SchedulerConfig &_config, bool _dry_run = false,
-            bool _in_bazel = false);
+            bool _in_bazel_test = false, bool _mock_kafka = false);
   virtual ~Scheduler();
 
   FetchStats getStats() const;

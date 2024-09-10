@@ -6,7 +6,8 @@ cc_library(
         "test_visits.h",
         "test_urls.h",
         "test_qgs.h",
-        "test_pages.h"],
+        "test_pages.h",
+        "test_datasets.h"],
     copts=[],
     deps=[
         "//src/core"

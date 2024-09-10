@@ -178,7 +178,7 @@ void PageDbScylla::fullScanWebPages(CassSession *_session, ScanPageCb _cb) {
   cass_future_free(future);
   cass_statement_free(statement);
 
-  if (err_str.empty())
+  if (!err_str.empty())
     throw std::runtime_error(err_str);
 }
 

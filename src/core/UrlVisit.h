@@ -11,6 +11,7 @@ public:
   UrlVisit(const Url &_url, Tp _tp);
   UrlVisit(const std::string &_json);
   UrlVisit() = default;
+  std::string asJs() const;
 };
 
 } // namespace contentv1

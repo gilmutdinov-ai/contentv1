@@ -24,8 +24,10 @@ SchedulerTester::SchedulerTester() {
   cfg.parse(config_path);
   // std::cout << cfg.help() << std::endl;
   cfg.validate();
-  bool dry_run = true;
-  m_scheduler.reset(new Scheduler{cfg, dry_run}); //
+  constexpr bool dry_run = true;
+  constexpr bool in_bazel_test = true;
+  constexpr bool mock_kafka = true;
+  m_scheduler.reset(new Scheduler{cfg, dry_run, in_bazel_test, mock_kafka}); //
 
   REQUIRE(m_scheduler->m_loaded_uts_count != 0);
   REQUIRE(m_scheduler->m_url_freq_stats->max() != 0);

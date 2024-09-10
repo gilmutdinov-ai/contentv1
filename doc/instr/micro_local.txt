@@ -9,3 +9,5 @@
         /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic global_fetch_queue --from-beginning
     4. Запускаем шедулер
         build/sched_dry_run.sh
+    5. Записываем тестовый датасет
+        ./build/run_kafka_loader.sh
