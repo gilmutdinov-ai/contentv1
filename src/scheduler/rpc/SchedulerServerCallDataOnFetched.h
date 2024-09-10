@@ -6,7 +6,7 @@ namespace contentv1 {
 class CallDataOnFetched final : public CallDataBase {
 public:
   CallDataOnFetched(SchedulerRPC::AsyncService *service,
-                    grpc::ServerCompletionQueue *cq, SchedulerApi::Ptr _sched);
+                    grpc::ServerCompletionQueue *cq, IScheduler::Ptr _sched);
 
   void Proceed() override;
   virtual ~CallDataOnFetched() = default;

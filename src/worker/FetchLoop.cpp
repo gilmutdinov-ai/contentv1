@@ -33,7 +33,7 @@ void FetchLoopConfig::onParsed() {
 }
 
 FetchLoop::FetchLoop(misc::KafkaReaderI::Ptr _kafka_reader,
-                     SchedulerApi::Ptr _scheduler_api, IPageDb::Ptr _page_db,
+                     IScheduler::Ptr _scheduler_api, IPageDb::Ptr _page_db,
                      const FetchLoopConfig &_config)
     : m_running(true), FetchLoopMergeQueue(_config.merge_interval_secs),
       m_req_batch(new ReqBatch), m_kafka_reader(_kafka_reader),

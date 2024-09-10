@@ -9,7 +9,7 @@
 #include "misc/Vectors.h"
 #include "misc/httpcli/http_client.h"
 #include "misc/kafkawrap/KafkaReader.h"
-#include "scheduler/SchedulerApi.h"
+#include "scheduler/IScheduler.h"
 #include "worker/ReqBatch.h"
 #include <atomic>
 
@@ -65,7 +65,7 @@ public:
 private:
   std::atomic<bool> m_running;
   misc::KafkaReaderI::Ptr m_kafka_reader;
-  SchedulerApi::Ptr m_scheduler_api;
+  IScheduler::Ptr m_scheduler_api;
 
   using HttpClient = misc::HttpClientA<GFQRecord>;
   using HttpClientPtr = std::shared_ptr<HttpClient>;
@@ -86,7 +86,7 @@ public:
   using Ptr = std::shared_ptr<FetchLoop>;
 
   FetchLoop(misc::KafkaReaderI::Ptr _kafka_reader,
-            SchedulerApi::Ptr _scheduler_api, IPageDb::Ptr _page_db,
+            IScheduler::Ptr _scheduler_api, IPageDb::Ptr _page_db,
             const FetchLoopConfig &_config = FetchLoopConfig{});
 
   ~FetchLoop();

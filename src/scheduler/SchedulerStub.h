@@ -1,12 +1,12 @@
 #pragma once
-#include "scheduler/SchedulerApi.h"
+#include "scheduler/IScheduler.h"
 #include "src/proto/CrawlAttempts.pb.h"
 #include <memory>
 #include <vector>
 
 namespace contentv1 {
 
-class SchedulerStub : public SchedulerApi {
+class SchedulerStub : public IScheduler {
   std::vector<GFQRecord> m_crawled;
   std::vector<std::pair<std::string, std::string>> m_robots;
   std::vector<std::pair<GFQRecord, CrawlAttemptsPb::AttemptStatus>> m_failed;

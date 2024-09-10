@@ -4,7 +4,7 @@ namespace contentv1 {
 
 CallDataTryFetchUrls::CallDataTryFetchUrls(SchedulerRPC::AsyncService *service,
                                            grpc::ServerCompletionQueue *cq,
-                                           SchedulerApi::Ptr _sched)
+                                           IScheduler::Ptr _sched)
     : CallDataBase{service, cq, _sched}, responder_(&ctx_) {
   Proceed();
 }

@@ -10,7 +10,7 @@ WorkerConfig::WorkerConfig() {
   addStrings({STR_FETCH_TOPIC, STR_KAFKA_GROUP_ID});
 }
 
-Worker::Worker(IPageDb::Ptr _page_db, SchedulerApi::Ptr _scheduler_api,
+Worker::Worker(IPageDb::Ptr _page_db, IScheduler::Ptr _scheduler_api,
                const WorkerConfig &_config, bool _is_dry_run)
     : m_page_db{_page_db}, m_scheduler_api(_scheduler_api),
       m_is_dry_run(_is_dry_run) {

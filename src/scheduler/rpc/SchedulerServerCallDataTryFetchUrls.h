@@ -6,8 +6,7 @@ namespace contentv1 {
 class CallDataTryFetchUrls final : public CallDataBase {
 public:
   CallDataTryFetchUrls(SchedulerRPC::AsyncService *service,
-                       grpc::ServerCompletionQueue *cq,
-                       SchedulerApi::Ptr _sched);
+                       grpc::ServerCompletionQueue *cq, IScheduler::Ptr _sched);
 
   virtual ~CallDataTryFetchUrls() = default;
   void Proceed() override;

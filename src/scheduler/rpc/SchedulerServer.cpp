@@ -16,7 +16,7 @@ SchedulerServerConfig::SchedulerServerConfig() {
 }
 
 SchedulerServer::SchedulerServer(const SchedulerServerConfig &_config,
-                                 SchedulerApi::Ptr _sched)
+                                 IScheduler::Ptr _sched)
     : m_listen_addr{_config[SchedulerServerConfig::STR_LISTEN_ADDR].asString()},
       m_listen_port{_config[SchedulerServerConfig::INT_LISTEN_PORT].asInt()},
       m_sched(_sched), m_th{std::bind(&SchedulerServer::_thread, this)} {}

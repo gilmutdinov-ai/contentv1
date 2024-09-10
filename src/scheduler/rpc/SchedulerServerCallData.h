@@ -1,5 +1,5 @@
 #pragma once
-#include "scheduler/SchedulerApi.h"
+#include "scheduler/IScheduler.h"
 
 #include "src/scheduler/rpc/scheduler.grpc.pb.h"
 #include "src/scheduler/rpc/scheduler.pb.h"
@@ -11,7 +11,7 @@ namespace contentv1 {
 class CallDataBase {
 public:
   CallDataBase(SchedulerRPC::AsyncService *service,
-               grpc::ServerCompletionQueue *cq, SchedulerApi::Ptr _sched);
+               grpc::ServerCompletionQueue *cq, IScheduler::Ptr _sched);
   virtual ~CallDataBase() = default;
   virtual void Proceed() = 0;
   //  void CallTryFetchUrls(const TryFetchRequest &_request, TryFetchReply
@@ -22,7 +22,7 @@ protected:
   grpc::ServerCompletionQueue *cq_;
   grpc::ServerContext ctx_;
 
-  SchedulerApi::Ptr m_sched;
+  IScheduler::Ptr m_sched;
 
   // in ancestors:
   /*

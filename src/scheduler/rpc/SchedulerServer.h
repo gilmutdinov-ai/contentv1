@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scheduler/SchedulerApi.h"
+#include "scheduler/IScheduler.h"
 
 #include "scheduler/rpc/SchedulerServerCallData.h"
 #include "src/scheduler/rpc/scheduler.grpc.pb.h"
@@ -35,8 +35,7 @@ class SchedulerServer final {
 public:
   using Ptr = std::shared_ptr<SchedulerServer>;
 
-  SchedulerServer(const SchedulerServerConfig &_config,
-                  SchedulerApi::Ptr _sched);
+  SchedulerServer(const SchedulerServerConfig &_config, IScheduler::Ptr _sched);
   ~SchedulerServer();
 
   void stop();
@@ -47,7 +46,7 @@ private:
   void HandleRpcs();
   void InstateAllCallDatas(std::unique_ptr<grpc::ServerCompletionQueue> &_cq,
                            SchedulerRPC::AsyncService &_service,
-                           SchedulerApi::Ptr _sched) const;
+                           IScheduler::Ptr _sched) const;
 
   const std::string m_listen_addr;
   const int m_listen_port;
@@ -56,7 +55,7 @@ private:
   SchedulerRPC::AsyncService service_;
   std::unique_ptr<grpc::Server> server_;
 
-  SchedulerApi::Ptr m_sched;
+  IScheduler::Ptr m_sched;
 
   std::thread m_th;
   std::atomic<bool> m_running{true};

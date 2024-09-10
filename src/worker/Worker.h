@@ -4,7 +4,7 @@
 #include <memory>
 #include <thread>
 
-// #include "scheduler/SchedulerApi.h"
+// #include "scheduler/IScheduler.h"
 
 namespace contentv1 {
 
@@ -28,7 +28,7 @@ class Worker {
 
   IPageDb::Ptr m_page_db;
 
-  SchedulerApi::Ptr m_scheduler_api;
+  IScheduler::Ptr m_scheduler_api;
   misc::KafkaReader::Ptr m_kafka_reader;
 
   FetchLoop::Ptr m_fetch_loop;
@@ -39,7 +39,7 @@ class Worker {
 public:
   using Ptr = std::shared_ptr<Worker>;
 
-  Worker(IPageDb::Ptr _page_db, SchedulerApi::Ptr _scheduler_api,
+  Worker(IPageDb::Ptr _page_db, IScheduler::Ptr _scheduler_api,
          const WorkerConfig &_config, bool _is_dry_run = false);
   ~Worker();
 

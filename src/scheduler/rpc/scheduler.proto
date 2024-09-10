@@ -13,7 +13,7 @@ import "src/proto/GFQRecord.proto";
 import "src/proto/FetchResult.proto";
 
 /*
-см SchedulerApi
+см IScheduler
 
 способ позвать по сети
 

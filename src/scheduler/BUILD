@@ -16,7 +16,7 @@ cc_library(
         "EnqueueLoop.h",
         "LoadLoop.h",
         "Scheduler.h",
-        "SchedulerApi.h",
+        "IScheduler.h",
         "SchedulerStub.h"
     ],
     visibility = ["//visibility:public"],

@@ -7,8 +7,8 @@
 #include "ldb/UrlsDaysDb.h"
 #include "misc/Config.h"
 #include "scheduler/EnqueueLoop.h"
+#include "scheduler/IScheduler.h"
 #include "scheduler/LoadLoop.h"
-#include "scheduler/SchedulerApi.h"
 #include <thread>
 
 /*
@@ -56,7 +56,7 @@ public:
   //  SchedulerConfig(const std::string &fn);
 };
 
-class Scheduler : public SchedulerApi {
+class Scheduler : public IScheduler {
   // persistent, concurrently accessed
   HostDb::Ptr m_host_db;
   UrlDb::Ptr m_url_db;

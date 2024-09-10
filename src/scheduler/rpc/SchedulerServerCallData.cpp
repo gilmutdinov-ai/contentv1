@@ -3,7 +3,7 @@
 namespace contentv1 {
 CallDataBase::CallDataBase(SchedulerRPC::AsyncService *service,
                            grpc::ServerCompletionQueue *cq,
-                           SchedulerApi::Ptr _sched)
+                           IScheduler::Ptr _sched)
     : service_(service), cq_(cq), m_sched(_sched), status_(CREATE) {}
 
 } // namespace contentv1

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scheduler/SchedulerApi.h"
+#include "scheduler/IScheduler.h"
 
 #include "src/scheduler/rpc/scheduler.grpc.pb.h"
 #include "src/scheduler/rpc/scheduler.pb.h"
@@ -27,7 +27,7 @@ using grpc::Status;
 
 namespace contentv1 {
 
-class SchedulerClient : public SchedulerApi {
+class SchedulerClient : public IScheduler {
 public:
   explicit SchedulerClient(std::shared_ptr<Channel> channel)
       : stub_(SchedulerRPC::NewStub(channel)) {}

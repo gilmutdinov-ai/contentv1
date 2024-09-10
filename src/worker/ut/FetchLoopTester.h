@@ -1,6 +1,6 @@
 #pragma once
 #include "misc/kafkawrap/KafkaReader.h"
-#include "scheduler/SchedulerApi.h"
+#include "scheduler/IScheduler.h"
 #include "worker/FetchLoop.h"
 
 namespace contentv1 {
@@ -11,7 +11,7 @@ class FetchLoopTester {
       "/data/ds/gened_visits_dataset.json"};
 
   misc::KafkaReader::Ptr m_kafka_reader;
-  SchedulerApi::Ptr m_scheduler_api;
+  IScheduler::Ptr m_scheduler_api;
   IPageDb::Ptr m_page_db;
   FetchLoop::Ptr m_fetch_loop;
 

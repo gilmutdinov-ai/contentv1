@@ -7,10 +7,10 @@
 
 namespace contentv1 {
 
-class SchedulerApi {
+class IScheduler {
 public:
-  using Ptr = std::shared_ptr<SchedulerApi>;
-  virtual ~SchedulerApi() = default;
+  using Ptr = std::shared_ptr<IScheduler>;
+  virtual ~IScheduler() = default;
 
   // tryFetchUrls
   //   можно качать прямо сейчас, никого не заддосим,
