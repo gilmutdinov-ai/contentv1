@@ -73,7 +73,8 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
 
   if (_dry_run) {
     LOG("Calling m_load_loop->_loopImpl()");
-    auto cnt = m_load_loop->_loopImpl();
+    constexpr bool kafka_dont_block = true;
+    auto cnt = m_load_loop->_loopImpl(kafka_dont_block);
     LOG("DONE, loaded: " << cnt);
     // sleep(2); // if empty
     LOG("Calling m_urls_days_db->waitMerged()..");

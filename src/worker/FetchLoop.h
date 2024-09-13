@@ -97,7 +97,7 @@ public:
   FetchStats getStats() const;
 
 private:
-  void _loopImpl();
+  void _loopImpl(bool _kafka_dont_block = false);
   void _onResponse(HttpClient::JobInfo _ji);
 
   // MERGE QUEUE

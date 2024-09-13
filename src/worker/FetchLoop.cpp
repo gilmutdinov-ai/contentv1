@@ -70,10 +70,10 @@ void FetchLoop::loop() {
   _loopImpl();
 }
 
-void FetchLoop::_loopImpl() {
+void FetchLoop::_loopImpl(bool _kafka_dont_block) {
 
   GFQReader::read(
-      m_kafka_reader,
+      m_kafka_reader, _kafka_dont_block,
       [&](const GFQRecord &_gfq) {
         // std::cout << "pushing to queue: " << _gfq.url << std::endl;
         //        LOG("pushing to queue: " << _gfq.url);

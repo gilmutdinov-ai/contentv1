@@ -22,7 +22,7 @@ class LoadLoop {
   UrlsDaysDb::Ptr m_urls_days_db;
   misc::KafkaReaderI::Ptr m_kafka_reader;
 
-  Cnt _loopImpl();
+  Cnt _loopImpl(bool _kafka_dont_block = false);
 
 public:
   LoadLoop(const LoadLoopConfig &cfg, UrlFreqStatsLF::Ptr _url_freq_stats,

@@ -94,8 +94,8 @@ std::vector<GFQRecord> SchedulerServerTester::callTryFetch_() {
   m_kafka_reader.reset(new misc::KafkaReaderMock{
       m_cfg[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC].asString()});
   GFQReader::read(
-      m_kafka_reader, [&](const GFQRecord &_gfq) { try_urls.push_back(_gfq); },
-      10);
+      m_kafka_reader, true, // dont block
+      [&](const GFQRecord &_gfq) { try_urls.push_back(_gfq); }, 10);
   //
   std::cout << "try_urls: " << try_urls.size() << std::endl;
   std::vector<GFQRecord> allowed_urls;

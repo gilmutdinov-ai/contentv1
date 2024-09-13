@@ -21,18 +21,20 @@ void LoadLoop::loop() {
   }
 }
 
-Cnt LoadLoop::_loopImpl() {
-  Cnt loaded_cnt = 0;
-  UrlVisitsReader::read(m_kafka_reader, [&](const UrlVisit &_uv) {
-    LOG("UrlVisitsReader::read: " << _uv.url);
-    auto now = misc::get_now();
-    m_url_freq_stats->insert(_uv, now);
-    m_urls_days_db->saveVisit(_uv);
-    ++loaded_cnt;
+Cnt LoadLoop::_loopImpl(bool _kafka_dont_block) {
 
-    if (!m_running.load())
-      m_kafka_reader->stop();
-  });
+  Cnt loaded_cnt = 0;
+  UrlVisitsReader::read(m_kafka_reader, _kafka_dont_block,
+                        [&](const UrlVisit &_uv) {
+                          LOG("UrlVisitsReader::read: " << _uv.url);
+                          auto now = misc::get_now();
+                          m_url_freq_stats->insert(_uv, now);
+                          m_urls_days_db->saveVisit(_uv);
+                          ++loaded_cnt;
+
+                          if (!m_running.load())
+                            m_kafka_reader->stop();
+                        });
   return loaded_cnt;
 }
 
