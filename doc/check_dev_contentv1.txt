@@ -15,7 +15,7 @@
                 генерировать таймстампы url_visit [DONE]
                 сортировать по тс [DONE]
     Рантайм
-        Scheduler
+        Scheduler [DONE]
             c++ helloworld [DONE]
             test read kafka [DONE]
                 c++ rdkafka config [DONE]
@@ -62,7 +62,7 @@
                     "max_system_parallel_crawl" [DONE]
             urldb [DONE]
                 из конфига таргеты CrawlTargets [DONE]
-                Url Meta
+                Url Meta [DONE]
                     proto [DONE]
                         .proto [DONE]
                         compile script [DONE]
@@ -96,7 +96,7 @@
                     load in constructor [DONE]
                     snapshot thread [DONE]
                 test [DONE]
-            EnqLoop
+            EnqLoop [DONE]
                 Подбор топа урлов [DONE]
                     написать драфт (бинпоиск) [DONE]
                     протестить изолировано, когда есть UrlsDaysDb [DONE]
@@ -161,7 +161,7 @@
                      timers [DONE]
                      запись в кафку [DONE]
 
-            Scheduler.h - Выпотрошить и протестить
+            Scheduler.h - Выпотрошить и протестить [DONE]
                 config file [DONE]
                 загружать в тесте [DONE]
                 инстанцировать шедулер [DONE]
@@ -181,7 +181,7 @@
             Проверить что UrlFreqStats конструируется из UrlsDaysDb [DONE]
             leveldb lock error in tests [DONE]
                 разные директории в тестах - сделать тесты герметичными [DONE]
-        Worker
+        Worker [DONE]
             ch merge queue [DONE]
                 затащить httpcli в кодобазу [DONE]
                 внедрить MQ [DONE]
@@ -190,7 +190,7 @@
                         Затащить актаульный curl [DONE]
                 fake server test [DONE]
                     занести http сервер [DONE]
-            FetchLoop 
+            FetchLoop [DONE]
                 MergeQueue [DONE]
                 Shed call [DONE]
                     push_vector_minus test [DONE]
@@ -211,7 +211,7 @@
             Переделать алгоритм шедулера чтобы применять к роботс политики
             - ничего не качать с сайта пока не было попытки роботс, дальше качать, роботс обновлять раз в день [DONE]
                 Протестить [DONE]
-        Скачать сайты newsletters
+        Качать страницы newsletters в dryrun [DONE]
           собрать contentd [DONE]
             Scheduler API in Scheduler [DONE]
                 AttemptResult -> AttemptStatus [DONE]
@@ -243,8 +243,8 @@
             PageDb [DONE]
                 impl [DONE]
                 integrate [DONE]
-            QueryThread/API
-                QueryLoop (Worker)
+            QueryThread/API [DONE]
+                QueryLoop (Worker) [DONE]
                     Tester [DONE]
                     Структурки для запросов [DONE]
                         QueryGroup [DONE]
@@ -254,7 +254,7 @@
                     занести AhoCorasick [DONE]
                     QueryDb [DONE]
                     QueryGroupMatcherTest [DONE]
-                    QueryLoop
+                    QueryLoop [DONE]
                         QueryLoop::_query Test [DONE]
                         Test with QG in QueryDb [DONE]
                         Query interval in config [DONE]
@@ -262,7 +262,7 @@
                         integrate with contentd [OVER API]
                             dry run test [WONTDO]
 
-                API (Contentd)
+                API (Contentd) [DONE]
                   - https://developer.x.com/en/docs/authentication/oauth-2-0/bearer-tokens
                     api/v1 dir [DONE]
                     Tester [DONE]
@@ -285,6 +285,10 @@
                     integrate with contentd [DONE]
                         Вынести pagedb на уровень contentd [DONE]
                         Встроить API (QueryLoop) в contentd [DONE]
+
+        Contentd сделать пригодным для использования
+            Выбор scylla для pagedb в конфиге
+                Yaml переделать конфиг <-------
 
         (prestable) выставить на сервере
             fetch_doc_limit_size
