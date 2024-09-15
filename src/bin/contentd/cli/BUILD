@@ -11,7 +11,8 @@ cc_library(
     deps = [
         "//src/scheduler/default",
         "//src/worker",
-        "//src/api/v1"
+        "//src/api/v1",
+        "//src/scylla"
     ],
     copts = [
         "-Isrc/"

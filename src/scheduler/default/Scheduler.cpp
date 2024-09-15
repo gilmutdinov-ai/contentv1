@@ -88,7 +88,7 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
       Scheduler::_fillUrlFreqStats(m_urls_days_db, m_url_freq_stats);
   LOG("DONE");
   LOG("Calling m_url_freq_stats->waitMerged()..");
-  m_url_freq_stats->waitMerged();
+  // m_url_freq_stats->waitMerged();
   LOG("DONE");
 
   if (_dry_run) {

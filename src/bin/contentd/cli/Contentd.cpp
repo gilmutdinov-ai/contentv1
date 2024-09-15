@@ -1,12 +1,15 @@
 #include "bin/contentd/cli/Contentd.h"
 #include "misc/Log.h"
 #include "misc/kafkawrap/KafkaStaticSim.h"
+#include "scylla/PageDbScylla.h"
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
 #include <boost/program_options/variables_map.hpp>
 
 namespace contentv1 {
+
+ContentdConfig::ContentdConfig() { addStrings(s_cfg_strings); }
 
 int Contentd::operator()(int argc, char **argv) {
 
@@ -35,11 +38,12 @@ int Contentd::operator()(int argc, char **argv) {
 
   // SCHEDULER
   LOG("Init scheduler..");
-  m_scheduler.reset(
-      new Scheduler{contentd_config, m_is_dry_run, m_is_under_bazel_test});
+  constexpr bool mock_kafka = false;
+  m_scheduler.reset(new Scheduler{contentd_config, m_is_dry_run,
+                                  m_is_under_bazel_test, mock_kafka});
   LOG("Init scheduler..DONE");
 
-  if (m_is_dry_run) {
+  if (mock_kafka) {
     // Waiting for Scheduler to push something to queue (KafkaStaticSim)
     // maybe remove
     sleep(2);
@@ -49,7 +53,23 @@ int Contentd::operator()(int argc, char **argv) {
   }
 
   // PAGEDB
-  m_page_db.reset(new PageDb{contentd_config});
+  std::string page_db_impl{
+      contentd_config[ContentdConfig::STR_PAGE_DB_IMPL].as<std::string>()};
+  if ("ldb" == page_db_impl) {
+    LOG("Init page_db ldb");
+    m_page_db.reset(new PageDb{contentd_config});
+  } else if ("scylla" == page_db_impl) {
+    LOG("Init page_db_scylla");
+    YAML::Emitter emitter;
+    emitter << contentd_config["page_db_scylla"];
+    PageDbScyllaConfig scylla_sub;
+    scylla_sub.parseString(emitter.c_str());
+    scylla_sub.validate();
+    m_page_db.reset(new PageDbScylla{scylla_sub});
+  } else {
+    LOG("Unknown page db impl: " << page_db_impl);
+    throw std::runtime_error("Unknown page db impl");
+  }
 
   // WORKER
   LOG("Init worker..");

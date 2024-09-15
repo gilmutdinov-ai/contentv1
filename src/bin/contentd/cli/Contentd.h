@@ -11,6 +11,13 @@ class ContentdConfig : public virtual PageDbConfig,
                        public virtual WorkerConfig,
                        public virtual APIv1WrapConfig {
 public:
+  inline static const std::string STR_PAGE_DB_IMPL{"page_db_impl"};
+
+private:
+  const std::vector<std::string> s_cfg_strings = {STR_PAGE_DB_IMPL};
+
+public:
+  ContentdConfig();
   virtual ~ContentdConfig() = default;
 };
 

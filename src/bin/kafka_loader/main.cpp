@@ -22,9 +22,10 @@ int main(int argc, char **argv) {
   cfg.validate("main:");
 
   std::string push_topic =
-      cfg[SchedulerConfig::STR_KAFKA_INPUT_STREAM_VISITS_TOPIC].asString();
-  std::vector<std::string> brokers = misc::get_str_array_from_json(
-      cfg[SchedulerConfig::STR_ARRAY_KAFKA_BROKERS]);
+      cfg[SchedulerConfig::STR_KAFKA_INPUT_STREAM_VISITS_TOPIC]
+          .as<std::string>();
+  std::vector<std::string> brokers =
+      misc::Config::getStrArray(cfg[SchedulerConfig::STR_ARRAY_KAFKA_BROKERS]);
 
   LOG("Loading dataset: " << dataset_path);
   auto gened_visits_dataset =
@@ -39,7 +40,7 @@ int main(int argc, char **argv) {
     for (size_t i = 0; i < gened_visits_dataset.size(); ++i) {
       kafka_writer->write(push_topic, gened_visits_dataset[i]);
     }
-    kafka_writer->flush(1000);
+    kafka_writer->flush(2000);
   }
   LOG("DONE, exiting..");
   return 0;

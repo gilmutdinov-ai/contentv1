@@ -20,7 +20,7 @@ namespace contentv1 {
 
 class PageDbScyllaConfig : virtual public misc::Config {
 public:
-  inline static const std::string STR_SCYLLA_HOSTS{"page_db_scylla_hosts"};
+  inline static const std::string STR_SCYLLA_HOSTS{"scylla_hosts"};
 
 private:
   const std::vector<std::string> s_cfg_arrays = {STR_SCYLLA_HOSTS};

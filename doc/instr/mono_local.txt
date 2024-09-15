@@ -1,0 +1,23 @@
+
+0. Предварительные условия
+
+    Поднята кафка (infra/)
+        Создан топик см infra/kafka/Readme.txt
+    Поднята scylla (infra/)
+        Создана схема sсhema.txt
+
+    Дальнейшие команды запускаются в докере
+        build/run_shell_docker.sh
+        cd /sources/contentv1
+
+1. Запустить contentd
+    build/build_contentd.sh
+    build/run_contentd.sh
+
+2. Загрузить тестовых визитов в кафку 
+    build/build_kafka_loader.sh
+    build/run_kafka_loader.sh
+
+3. Через какое-то время в scylla можно посмотреть сохраненный контент
+    cqlsh
+    SELECT count(*) FROM contentv1.web_pages
