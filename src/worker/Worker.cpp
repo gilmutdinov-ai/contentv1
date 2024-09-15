@@ -18,12 +18,12 @@ Worker::Worker(IPageDb::Ptr _page_db, IScheduler::Ptr _scheduler_api,
   if (_is_dry_run) {
     // sim
     m_kafka_reader.reset(new misc::KafkaReaderMock{
-        _config[WorkerConfig::STR_FETCH_TOPIC].asString()});
+        _config[WorkerConfig::STR_FETCH_TOPIC].as<std::string>()});
   } else {
     m_kafka_reader.reset(new misc::KafkaReader{
-        _config[WorkerConfig::STR_FETCH_TOPIC].asString(),
-        misc::get_str_array_from_json(_config[WorkerConfig::ARR_KAFKA_BROKERS]),
-        _config[WorkerConfig::STR_KAFKA_GROUP_ID].asString()});
+        _config[WorkerConfig::STR_FETCH_TOPIC].as<std::string>(),
+        misc::Config::getStrArray(_config[WorkerConfig::ARR_KAFKA_BROKERS]),
+        _config[WorkerConfig::STR_KAFKA_GROUP_ID].as<std::string>()});
   }
 
   m_fetch_loop.reset(new FetchLoop(m_kafka_reader, _scheduler_api, m_page_db));

@@ -13,23 +13,23 @@ FetchLoopConfig::FetchLoopConfig() noexcept {
 
 void FetchLoopConfig::onParsed() {
 
-  if ((*this)[FetchLoopConfig::STR_USER_AGENT].isString())
-    user_agent = (*this)[FetchLoopConfig::STR_USER_AGENT].asString();
-  if ((*this)[FetchLoopConfig::INT_REQUEST_TIMEOUT_SECS].isInt())
+  if ((*this)[FetchLoopConfig::STR_USER_AGENT].IsScalar())
+    user_agent = (*this)[FetchLoopConfig::STR_USER_AGENT].as<std::string>();
+  if ((*this)[FetchLoopConfig::INT_REQUEST_TIMEOUT_SECS].IsScalar())
     request_timeout_secs =
-        (*this)[FetchLoopConfig::INT_REQUEST_TIMEOUT_SECS].asInt();
-  if ((*this)[FetchLoopConfig::INT_SELECT_INTERVAL_USECS].isInt())
+        (*this)[FetchLoopConfig::INT_REQUEST_TIMEOUT_SECS].as<int>();
+  if ((*this)[FetchLoopConfig::INT_SELECT_INTERVAL_USECS].IsScalar())
     select_interval_usecs =
-        (*this)[FetchLoopConfig::INT_SELECT_INTERVAL_USECS].asInt();
-  if ((*this)[FetchLoopConfig::INT_MERGE_INTERVAL_SECS].isInt())
+        (*this)[FetchLoopConfig::INT_SELECT_INTERVAL_USECS].as<int>();
+  if ((*this)[FetchLoopConfig::INT_MERGE_INTERVAL_SECS].IsScalar())
     merge_interval_secs =
-        (*this)[FetchLoopConfig::INT_MERGE_INTERVAL_SECS].asInt();
-  if ((*this)[FetchLoopConfig::INT_MAX_REQUESTS_IN_BATCH].isInt())
+        (*this)[FetchLoopConfig::INT_MERGE_INTERVAL_SECS].as<int>();
+  if ((*this)[FetchLoopConfig::INT_MAX_REQUESTS_IN_BATCH].IsScalar())
     max_requests_in_batch =
-        (*this)[FetchLoopConfig::INT_MAX_REQUESTS_IN_BATCH].asInt();
-  if ((*this)[FetchLoopConfig::INT_KAFKA_READ_BATCH_SIZE].isInt())
+        (*this)[FetchLoopConfig::INT_MAX_REQUESTS_IN_BATCH].as<int>();
+  if ((*this)[FetchLoopConfig::INT_KAFKA_READ_BATCH_SIZE].IsScalar())
     kafka_read_batch_size =
-        (*this)[FetchLoopConfig::INT_KAFKA_READ_BATCH_SIZE].asInt();
+        (*this)[FetchLoopConfig::INT_KAFKA_READ_BATCH_SIZE].as<int>();
 }
 
 FetchLoop::FetchLoop(misc::KafkaReaderI::Ptr _kafka_reader,

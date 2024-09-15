@@ -21,7 +21,7 @@ int Contentd::operator()(int argc, char **argv) {
   ContentdConfig contentd_config;
   try {
     LOG("Parsing config: " << m_config_path);
-    contentd_config.parse(m_config_path);
+    contentd_config.parseFile(m_config_path);
     contentd_config.validate("Contentd::Contentd");
   } catch (std::exception &_ex) {
     LOG(_ex.what());
@@ -45,7 +45,7 @@ int Contentd::operator()(int argc, char **argv) {
     sleep(2);
     LOG("Records in queue: " << misc::KafkaStaticSim::size(
             contentd_config[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC]
-                .asString()));
+                .as<std::string>()));
   }
 
   // PAGEDB

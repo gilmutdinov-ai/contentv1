@@ -23,7 +23,7 @@ SchedulerServerTester::SchedulerServerTester() {
     std::cout << buffer.str();
   }
 
-  m_cfg.parse(config_path);
+  m_cfg.parseFile(config_path);
   // std::cout << cfg.help() << std::endl;
   m_cfg.validate();
   {
@@ -53,6 +53,7 @@ SchedulerServerTester::SchedulerServerTester() {
   callOnFetched_(allowed_urls); // CALL OnFetched FROM CLIENT
 
   // Check Scheduler state after
+  sleep(2);
   REQUIRE(m_scheduler->m_crawled_db->getFinishedToday() == allowed_urls.size());
 
   // m_sched_server->stop();
@@ -92,7 +93,7 @@ std::vector<GFQRecord> SchedulerServerTester::callTryFetch_() {
   //
   misc::KafkaReaderMock::Ptr m_kafka_reader;
   m_kafka_reader.reset(new misc::KafkaReaderMock{
-      m_cfg[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC].asString()});
+      m_cfg[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC].as<std::string>()});
   GFQReader::read(
       m_kafka_reader, true, // dont block
       [&](const GFQRecord &_gfq) { try_urls.push_back(_gfq); }, 10);

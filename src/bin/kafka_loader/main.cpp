@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
   LOG("kafka_loader: parsing scheduler config: " << config_path);
 
   SchedulerConfig cfg;
-  cfg.parse(config_path);
+  cfg.parseFile(config_path);
   cfg.validate("main:");
 
   std::string push_topic =

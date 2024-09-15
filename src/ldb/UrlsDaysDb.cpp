@@ -9,11 +9,12 @@ UrlsDaysDbConfig::UrlsDaysDbConfig() {
 }
 
 UrlsDaysDb::UrlsDaysDb(const UrlsDaysDbConfig &_config)
-    : m_db_path{_config[UrlsDaysDbConfig::STR_URLS_DAYS_DB_PATH].asString()},
+    : m_db_path{_config[UrlsDaysDbConfig::STR_URLS_DAYS_DB_PATH]
+                    .as<std::string>()},
       m_snapshot_interval_secs{
-          _config[UrlsDaysDbConfig::INT_SNAPSHOT_INTERVAL_SECS].asInt()},
+          _config[UrlsDaysDbConfig::INT_SNAPSHOT_INTERVAL_SECS].as<int>()},
       m_merge_interval_secs{
-          _config[UrlsDaysDbConfig::INT_MERGE_INTERVAL_SECS].asInt()},
+          _config[UrlsDaysDbConfig::INT_MERGE_INTERVAL_SECS].as<int>()},
       m_running(true) {
   // after configs parsed
   _config.validate();

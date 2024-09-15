@@ -13,7 +13,7 @@ EnqueueLoop::EnqueueLoop(const EnqueueLoopConfig &_config,
       m_host_db(_host_db), m_url_db(_url_db), m_crawled_db(_crawled_db),
       m_kafka_writer(_kafka_writer),
       m_push_topic{
-          _config[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC].asString()} {}
+          _config[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC].as<std::string>()} {}
 
 EnqueueLoop::~EnqueueLoop() {
   LOG("~LoadLoop() start");

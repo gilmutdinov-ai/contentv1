@@ -13,12 +13,13 @@ CrawledDb::CrawledDb(const CrawledDbConfig &_config) {
   // it works :-)
   UrlsDaysDbConfig ud_cfg;
   ud_cfg[UrlsDaysDbConfig::STR_URLS_DAYS_DB_PATH] =
-      _config[CrawledDbConfig::STR_CRAWLED_DB_PATH].asString();
+      _config[CrawledDbConfig::STR_CRAWLED_DB_PATH].as<std::string>();
   ud_cfg[UrlsDaysDbConfig::INT_SNAPSHOT_INTERVAL_SECS] =
-      _config[CrawledDbConfig::INT_CRAWLED_DB_SNAPSHOT_INTERVAL_SECS].asInt();
+      _config[CrawledDbConfig::INT_CRAWLED_DB_SNAPSHOT_INTERVAL_SECS].as<int>();
   ud_cfg[UrlsDaysDbConfig::INT_MERGE_INTERVAL_SECS] =
-      _config[CrawledDbConfig::INT_CRAWLED_DB_MERGE_INTERVAL_SECS].asInt();
+      _config[CrawledDbConfig::INT_CRAWLED_DB_MERGE_INTERVAL_SECS].as<int>();
 
+  ud_cfg.onParsed();
   ud_cfg.validate("CrawledDb::CrawledDb UrlsDaysDbConfig");
 
   _fillEnumFinishedValues();

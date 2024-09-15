@@ -21,7 +21,7 @@ SchedulerTester::SchedulerTester() {
   }
 
   SchedulerConfig cfg;
-  cfg.parse(config_path);
+  cfg.parseFile(config_path);
   // std::cout << cfg.help() << std::endl;
   cfg.validate();
   constexpr bool dry_run = true;

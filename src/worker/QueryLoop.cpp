@@ -10,7 +10,7 @@ QueryLoop::QueryLoop(QueryDb::Ptr _query_db, IPageDb::Ptr _page_db,
                      const QueryLoopConfig &_config)
     : m_running{true}, m_query_db{_query_db}, m_page_db{_page_db},
       m_query_interval_sec{
-          _config[QueryLoopConfig::INT_QUERY_INTERVAL_SEC].asInt()} {}
+          _config[QueryLoopConfig::INT_QUERY_INTERVAL_SEC].as<int>()} {}
 
 void QueryLoop::stop() { m_running.store(false); }
 

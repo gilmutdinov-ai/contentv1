@@ -33,8 +33,8 @@ TEST_CASE("Test UrlsDaysDb", "[UrlsDaysDb]") {
         db.saveVisit(v);
     }
 
-    sleep(cfg[UrlsDaysDbConfig::INT_MERGE_INTERVAL_SECS].asInt() +
-          cfg[UrlsDaysDbConfig::INT_SNAPSHOT_INTERVAL_SECS].asInt() + 1);
+    sleep(cfg[UrlsDaysDbConfig::INT_MERGE_INTERVAL_SECS].as<int>() +
+          cfg[UrlsDaysDbConfig::INT_SNAPSHOT_INTERVAL_SECS].as<int>() + 1);
     // std::cout << "db size: " << db.size() << std::endl;
     //  db.print();
   }

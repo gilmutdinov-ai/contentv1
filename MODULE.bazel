@@ -18,3 +18,5 @@ protoc.toolchain(
     google_protobuf = "com_google_protobuf",
     version = "v27.1",
 )
+
+bazel_dep(name = "yaml-cpp", version = "0.8.0")

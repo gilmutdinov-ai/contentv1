@@ -16,8 +16,7 @@
  sched_url_db_path : "/tmp/contentd_ut/url_db"
  sched_urls_days_db_path: "/tmp/contentd_ut/urls_days_db"
  sched_crawled_db_path :  "/tmp/contentd_ut/crawled_db"
- sched_crawled_db_merge_interval_secs: 1
-
+ 
  sched_kafka_brokers:
    - "kafka"
  sched_kafka_input_stream_visits_topic: "req_urls_stream"

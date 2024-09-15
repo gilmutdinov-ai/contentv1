@@ -22,16 +22,16 @@ LoadLoopTester::LoadLoopTester() {
   }
 
   SchedulerConfig _config;
-  _config.parse(config_path);
+  _config.parseFile(config_path);
   // std::cout << cfg.help() << std::endl;
   _config.validate();
   // m_url_freq_stats
   m_url_freq_stats.reset(new UrlFreqStatsLF{
       _config[SchedulerConfig::INT_URL_FREQ_STATS_LF_MERGE_INTERVAL_SECS]
-          .asInt()});
+          .as<int>()});
   // m_urls_days_db
   std::filesystem::remove_all(
-      _config[UrlsDaysDbConfig::STR_URLS_DAYS_DB_PATH].asString());
+      _config[UrlsDaysDbConfig::STR_URLS_DAYS_DB_PATH].as<std::string>());
   m_urls_days_db.reset(new UrlsDaysDb{_config});
   // m_kafka_reader
   {

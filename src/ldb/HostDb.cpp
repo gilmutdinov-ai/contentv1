@@ -8,7 +8,7 @@ HostDbConfig::HostDbConfig() { addStrings(s_cfg_strings); }
 
 HostDb::HostDb(const HostDbConfig &_config) : m_limits(_config) {
 
-  auto _path = _config[HostDbConfig::STR_HOST_DB_PATH].asString();
+  auto _path = _config[HostDbConfig::STR_HOST_DB_PATH].as<std::string>();
 
   std::filesystem::create_directories(_path);
 

@@ -24,7 +24,7 @@ int Workd::operator()(int argc, char **argv) {
   WorkdConfig workd_config;
   try {
     LOG("Parsing config: " << m_config_path);
-    workd_config.parse(m_config_path);
+    workd_config.parseFile(m_config_path);
     workd_config.validate("Workd::Workd");
   } catch (std::exception &_ex) {
     LOG(_ex.what());

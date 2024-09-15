@@ -46,15 +46,16 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
     m_kafka_reader.reset(new misc::KafkaReaderMock{gened_visits_dataset});
     LOG("Init KafkaWriterMock");
     m_kafka_writer.reset(new misc::KafkaWriterMock{
-        _config[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC].asString()}); // sim
+        _config[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC]
+            .as<std::string>()}); // sim
     LOG("Init Kafka mocks done");
   } else {
     m_kafka_reader.reset(new misc::KafkaReader{
         _config[SchedulerConfig::STR_KAFKA_INPUT_STREAM_VISITS_TOPIC]
-            .asString(),
-        misc::get_str_array_from_json(
+            .as<std::string>(),
+        misc::Config::getStrArray(
             _config[SchedulerConfig::STR_ARRAY_KAFKA_BROKERS])});
-    m_kafka_writer.reset(new misc::KafkaWriter{misc::get_str_array_from_json(
+    m_kafka_writer.reset(new misc::KafkaWriter{misc::Config::getStrArray(
         _config[SchedulerConfig::STR_ARRAY_KAFKA_BROKERS])});
   }
 
@@ -62,7 +63,7 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
   // fill from UrlsDaysDb
   m_url_freq_stats.reset(new UrlFreqStatsLF{
       _config[SchedulerConfig::INT_URL_FREQ_STATS_LF_MERGE_INTERVAL_SECS]
-          .asInt()});
+          .as<int>()});
 
   LOG("Init LoadLoop");
   m_load_loop.reset(

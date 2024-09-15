@@ -20,7 +20,7 @@ int Sched::operator()(int argc, char **argv) {
   SchedConfig sched_config;
   try {
     LOG("Parsing config: " << m_config_path);
-    sched_config.parse(m_config_path);
+    sched_config.parseFile(m_config_path);
     sched_config.validate("Sched::Sched");
   } catch (std::exception &_ex) {
     LOG(_ex.what());

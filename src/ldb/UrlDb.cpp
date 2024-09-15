@@ -11,9 +11,9 @@ UrlDbConfig::UrlDbConfig() {
 
 UrlDb::UrlDb(const UrlDbConfig &_config)
     : m_snapshot_interval_sec{
-          _config[UrlDbConfig::INT_URL_DB_SNAPSHOT_INTERVAL_SEC].asInt()} {
+          _config[UrlDbConfig::INT_URL_DB_SNAPSHOT_INTERVAL_SEC].as<int>()} {
 
-  auto db_path{_config[UrlDbConfig::STR_URL_DB_PATH].asString()};
+  auto db_path{_config[UrlDbConfig::STR_URL_DB_PATH].as<std::string>()};
   std::filesystem::create_directories(db_path);
 
   _loadData(db_path);

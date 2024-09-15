@@ -3,6 +3,7 @@ test_suite(
     name = "tests",
     tests = [
     "//src/tests/000_hello",
+    "//src/tests/001_yaml",
     "//src/tests/002_ada",
     "//src/tests/003_url_parsed",
     "//src/tests/004_url_freq_map",

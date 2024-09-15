@@ -51,8 +51,8 @@ void APIv1::APIResponse::setInternalError(const std::string &_mess) {
 APIv1::APIv1(QueryDb::Ptr _query_db, QueryLoop::Ptr _query_loop,
              const APIv1Config &_config)
     : m_query_loop(_query_loop), m_query_db(_query_db),
-      m_listen_addr{_config[APIv1Config::STR_LISTEN_ADDR].asString()},
-      m_listen_port{_config[APIv1Config::INT_LISTEN_PORT].asInt()},
+      m_listen_addr{_config[APIv1Config::STR_LISTEN_ADDR].as<std::string>()},
+      m_listen_port{_config[APIv1Config::INT_LISTEN_PORT].as<int>()},
       m_th{std::bind(&APIv1::_setupServer, this)} {
   // setup server in thread
   std::lock_guard<std::mutex> lock(m_mtx);

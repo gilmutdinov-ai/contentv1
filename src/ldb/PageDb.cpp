@@ -6,7 +6,7 @@ namespace contentv1 {
 PageDbConfig::PageDbConfig() { addStrings(s_cfg_strings); }
 
 PageDb::PageDb(const PageDbConfig &_config)
-    : m_db{_config[PageDbConfig::STR_PAGE_DB_PATH].asString()} {}
+    : m_db{_config[PageDbConfig::STR_PAGE_DB_PATH].as<std::string>()} {}
 
 void PageDb::save(const Url &_url, const std::string &_content) {
   m_db.save(_url, _content);

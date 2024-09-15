@@ -288,7 +288,13 @@
 
         Contentd сделать пригодным для использования
             Выбор scylla для pagedb в конфиге
-                Yaml переделать конфиг <-------
+                Yaml переделать конфиг [DONE]
+                    parse -> parseFile [DONE]
+                    iherit yaml & mimic json accessors [DONE]
+                    convert configs [DONE]
+                    get_str_array_from_json ->  Config::getStrArray [DONE]
+                    remove mimic json accessors [DONE]
+                Выбор scylla или lvl в конфиге
 
         (prestable) выставить на сервере
             fetch_doc_limit_size
