@@ -298,7 +298,7 @@
                 - instr/mono - работает, читает из кафки и пишет скачанное в сциллу
             Вынести в конфиг EnqueueLoop interval [DONE]
             Починить тесты [DONE]
-            dont regen dataset by default
+            dont regen dataset by default [DONE]
 
         (prestable) выставить на сервере
             fetch_doc_limit_size
