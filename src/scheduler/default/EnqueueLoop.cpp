@@ -7,7 +7,7 @@ namespace contentv1 {
 void EnqueueLoop::loop() {
   while (m_running.load()) {
     _loopImpl();
-    sleep(10);
+    sleep(m_enq_loop_interval);
     //_waitTillEndOfHour();
   }
 }

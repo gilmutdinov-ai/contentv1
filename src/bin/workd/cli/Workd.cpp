@@ -42,7 +42,7 @@ int Workd::operator()(int argc, char **argv) {
   // SCHEDULER CLIENT (RPC)
   {
     std::string target_str =
-        workd_config[WorkdConfig::STR_SCHED_GRPC_TARGET_STR].asString();
+        workd_config[WorkdConfig::STR_SCHED_GRPC_TARGET_STR].as<std::string>();
     m_scheduler_client.reset(new SchedulerClient(
         grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials())));
   }

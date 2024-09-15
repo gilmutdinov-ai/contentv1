@@ -9,8 +9,11 @@
 
 using namespace contentv1;
 
+// load gened visits dataset to kafka
+
 // run in workspace dir
-std::string config_path = "./src/bin/sched/cli/ut/sched_ut.conf";
+// std::string config_path = "./src/bin/sched/cli/ut/sched_ut.conf";
+std::string config_path = "./src/bin/contentd/cli/ut/contentd_ut.conf";
 std::string dataset_path = "." + s_gened_visits_dataset_rel_path;
 
 int main(int argc, char **argv) {

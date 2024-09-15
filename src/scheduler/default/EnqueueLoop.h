@@ -31,14 +31,17 @@ namespace contentv1 {
 
 class EnqueueLoopConfig : public virtual CrawlTargetsConfig {
 public:
-  inline static const std::string STR_ENQ_LOOP_DB_PATH{
-      "sched_enq_loop_db_path"};
   inline static const std::string STR_KAFKA_PUSH_TOPIC{
       "sched_kafka_push_topic"};
+  inline static const std::string STR_ENQ_LOOP_DB_PATH{
+      "sched_enq_loop_db_path"};
+  inline static const std::string INT_ENQ_LOOP_INTERVAL{
+      "sched_enq_loop_interval_secs"};
 
 private:
   const std::vector<std::string> s_cfg_strs = {STR_ENQ_LOOP_DB_PATH,
                                                STR_KAFKA_PUSH_TOPIC};
+  const std::vector<std::string> s_cfg_ints = {INT_ENQ_LOOP_INTERVAL};
 
 public:
   EnqueueLoopConfig();
@@ -49,6 +52,7 @@ class EnqueueLoop {
   CrawlTargets m_targets;
 
   std::atomic<bool> m_running;
+  int m_enq_loop_interval;
 
   //// DB
   UrlFreqStats::Ptr m_url_freq_stats;

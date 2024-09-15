@@ -296,8 +296,9 @@
                     remove mimic json accessors [DONE]
                 Выбор scylla или lvl в конфиге [DONE]
                 - instr/mono - работает, читает из кафки и пишет скачанное в сциллу
-            Вынести в конфиг EnqueueLoop interval
-            Писать стату в кх
+            Вынести в конфиг EnqueueLoop interval [DONE]
+            Починить тесты [DONE]
+            dont regen dataset by default
 
         (prestable) выставить на сервере
             fetch_doc_limit_size

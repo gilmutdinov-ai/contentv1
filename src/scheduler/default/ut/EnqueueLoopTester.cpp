@@ -44,6 +44,7 @@ EnqueueLoop::Ptr EnqueueLoopTester::_initEnqLoop(
 
   EnqueueLoopConfig cfg;
   // std::cout << cfg.help() << std::endl;
+  cfg[EnqueueLoopConfig::INT_ENQ_LOOP_INTERVAL] = 1;
   cfg[EnqueueLoopConfig::STR_ENQ_LOOP_DB_PATH] = m_enq_loop_db_path;
   cfg[CrawlTargetsConfig::INT_TARGET_DAY_CRAWL] = m_target_day_crawl;
   cfg[EnqueueLoopConfig::STR_KAFKA_PUSH_TOPIC] = m_push_topic;
