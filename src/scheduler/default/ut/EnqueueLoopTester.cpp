@@ -225,34 +225,6 @@ void EnqueueLoopTester::_testAfterState() {
     REQUIRE(push_urls.size() >= m_urls_count / 2);
     REQUIRE(decisions.size() >= m_urls_count);
   }
-  {         // LOTS OF DEBUG OUTPUT
-    return; // TODO REMOVE TEST BINSEARCH
-    Cnt top{m_urls_count / 2 + 10};
-    std::vector<UrlFreq> push_urls;
-    auto decisions = m_enq_loop->_filter(top, push_urls);
-    std::cout << "EnqueueLoopTester::_testAfterState push_count: "
-              << push_urls.size() << std::endl;
-    for (size_t i = 0; i < push_urls.size(); ++i) {
-      auto url = push_urls[i].first;
-      auto freq = push_urls[i].second;
-      auto url_id = parse_test_url_id(url);
-
-      std::cout << url_id << ": " << url << std::endl;
-    }
-    /*
-    auto descr = EUrlCrawlDecisionPb_descriptor();
-    std::cout << "decisions.size: " << decisions.size() << std::endl;
-    for (size_t i = 0; i < decisions.size(); ++i) {
-      std::cout << "dec: " << descr->FindValueByNumber(decisions[i])->name()
-                << std::endl;
-    }
-    */
-    //  REQUIRE(push_urls.size() == push_count);
-    //  REQUIRE(push_urls.size() == 1);
-    //  REQUIRE(push_urls[0].first == url);
-  }
-  // REQUIRE(1 == 2); // show log file
-  //   check bin search
 }
 
 void EnqueueLoopTester::_testCheckEnqueue() {
