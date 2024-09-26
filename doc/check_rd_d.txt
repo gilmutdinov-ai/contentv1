@@ -94,13 +94,24 @@
             workd ходит в sched
             workd сохраняет контент в scylla
 
-Панель метрик Grafana
-    Занести clickhouse
-        Запустить в compose [DONE]
-        Подключиться извне
-        Подключиться из С++
-        Внедрить сбор метрик из приложения
-    Занести Grafana
+Observability
+    Решить prom, ch, grafana? [DONE]
+        - сначала prom
+    Сделать adhoc мониторинг докер-контейнера на ноуте
+        - https://www.geeksforgeeks.org/how-to-use-prometheus-to-monitor-docker-containerized-applications/
+        Поднять пром на хосте [DONE]
+        Поднять графану в contentv1_network
+        Поднять пром в contentv1_network
+        Зайти в интерфейс графаны с хоста
+        Подключить в графане пром datasource
+
+    Панель метрик Grafana
+        Занести clickhouse
+            Запустить в compose [DONE]
+            Подключиться извне
+            Подключиться из С++
+            Внедрить сбор метрик из приложения
+        Занести Grafana
 
 kubernetes
 

@@ -1,0 +1,20 @@
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+     - GF_SERVER_ROOT_URL=http://localhost/
+     - GF_INSTALL_PLUGINS=grafana-clock-panel
+    ports:
+     - '3000:3000'
+    volumes:
+     - 'grafana_storage:/var/lib/grafana'
+#    networks:
+#     - contentv1_network
+volumes:
+  grafana_storage: {}
+#networks:
+#  contentv1_network:
+#    external:
+#      name: contentv1_network
