@@ -75,7 +75,7 @@ RUN source ~/.nvm/nvm.sh && nvm install --lts
 
 ### scylladb
 
-ADD ./contribs/scylla-cpp /contribs/scylla-cpp
+ADD ./contribs/cpp-driver /contribs/scylla-cpp
 
 RUN cd /contribs/scylla-cpp && cmake -DCASS_BUILD_STATIC=ON  -DCASS_BUILD_SHARED=OFF . && make -j8 && make install
 
