@@ -45,7 +45,7 @@ TEST_CASE("Test UrlsDaysDb", "[UrlsDaysDb]") {
 
     REQUIRE(db.size() == 1);
     std::vector<UrlTpStat> utsv;
-    db.getUTSV(url, utsv);
+    REQUIRE(db.getUTSV(url, utsv));
     // std::cout << "utsv.size: " << utsv.size() << std::endl;
     REQUIRE(utsv.size() == 12);
     REQUIRE(utsv[0].cnt == 1);
