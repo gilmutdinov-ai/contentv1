@@ -18,9 +18,9 @@ bool APIv1::_parseApiKeys(const httplib::Headers &_headers,
     _error_str = s_auth_basic_header + " header too small";
     return false;
   }
-  auto auth_info =
+  const auto auth_info =
       misc::base64_decode(auth_header.substr(s_header_basic_prefix.size()));
-  auto auth_tokens = misc::split(auth_info, ':');
+  const auto auth_tokens = misc::split(auth_info, ':');
   if (auth_tokens.size() != 2 || auth_tokens[0].empty() ||
       auth_tokens[1].empty()) {
     _error_str = s_auth_basic_header +
@@ -42,7 +42,7 @@ bool APIv1::_parseBearer(const httplib::Headers &_headers, std::string &_token,
     _error_str = s_auth_basic_header + " header not found";
     return false;
   }
-  auto auth_header = it->second;
+  const auto auth_header = it->second;
   if (auth_header.size() != s_header_bearer_exact_size) {
     _error_str = s_auth_basic_header + " header wrong size";
     return false;

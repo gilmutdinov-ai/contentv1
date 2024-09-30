@@ -60,11 +60,11 @@ void EnqueueLoop::_waitTillEndOfHour() {
 Cnt EnqueueLoop::_calcHourTarget() {
 
   // auto till_day_end = misc::get_now() - misc::get_day_end();
-  Cnt crawled_today = m_crawled_db->getFinishedToday();
+  const Cnt crawled_today = m_crawled_db->getFinishedToday();
   LOG("crawled_today: " << crawled_today);
-  auto left_crawl_today = m_targets.target_day_crawl - crawled_today;
+  const auto left_crawl_today = m_targets.target_day_crawl - crawled_today;
   LOG("left_crawl_today: " << left_crawl_today);
-  auto hours_till_midnight = misc::get_hours_till_midnight();
+  const auto hours_till_midnight = misc::get_hours_till_midnight();
   LOG("hours_till_midnight: " << hours_till_midnight);
   if (hours_till_midnight == 0)
     return left_crawl_today;
@@ -73,9 +73,9 @@ Cnt EnqueueLoop::_calcHourTarget() {
 
 Cnt EnqueueLoop::_calcToEnqueueNow() {
 
-  auto target_current_hour = _calcHourTarget();
+  const auto target_current_hour = _calcHourTarget();
   LOG("target_current_hour: " << target_current_hour);
-  auto in_progress_now = m_crawled_db->getInProgress();
+  const auto in_progress_now = m_crawled_db->getInProgress();
   LOG("in_progress_now: " << in_progress_now);
 
   if (in_progress_now < target_current_hour)

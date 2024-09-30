@@ -16,7 +16,7 @@ UrlDb::leaveNeedRobots(const std::vector<UrlFreq> &_in_robots, Tp _now,
 }
 
 EUrlCrawlDecisionPb UrlDb::_IsNeedCrawlRobots(const Url &_robots_url,
-                                              Tp _now) const {
+                                              const Tp _now) const {
   /*
       need_crawl? add to global queue
         never attempted - yes [OK]
@@ -37,29 +37,29 @@ EUrlCrawlDecisionPb UrlDb::_IsNeedCrawlRobots(const Url &_robots_url,
   if (last_attempt.status == CrawlAttemptsPb::ATTEMPT_STATUS_CURL_ERR) {
     if (std::chrono::duration_cast<std::chrono::hours>(
             _now - last_attempt.tp) >= std::chrono::hours{24})
-      return ALLOW;
-    return DISALLOW_TRY_IN_A_DAY;
+      return EUrlCrawlDecisionPb::ALLOW;
+    return EUrlCrawlDecisionPb::DISALLOW_TRY_IN_A_DAY;
   }
   // last attempt enqueued - wait 1 hour
   if (last_attempt.status == CrawlAttemptsPb::ATTEMPT_STATUS_ENQUEUED) {
     if (std::chrono::duration_cast<std::chrono::hours>(
             _now - last_attempt.tp) >= std::chrono::hours{1})
-      return ALLOW;
-    return DISALLOW_TRY_IN_HOUR;
+      return EUrlCrawlDecisionPb::ALLOW;
+    return EUrlCrawlDecisionPb::DISALLOW_TRY_IN_HOUR;
   }
   // last attempt pending - wait 1 hour
   if (last_attempt.status == CrawlAttemptsPb::ATTEMPT_STATUS_PENDING) {
     if (std::chrono::duration_cast<std::chrono::hours>(
             _now - last_attempt.tp) >= std::chrono::hours{1})
-      return ALLOW;
-    return DISALLOW_TRY_IN_HOUR;
+      return EUrlCrawlDecisionPb::ALLOW;
+    return EUrlCrawlDecisionPb::DISALLOW_TRY_IN_HOUR;
   }
   // last attempt succeded - wait 1 day
   if (last_attempt.status == CrawlAttemptsPb::ATTEMPT_STATUS_OK) {
     if (std::chrono::duration_cast<std::chrono::days>(_now - last_attempt.tp) >=
         std::chrono::hours{24})
-      return ALLOW;
-    return DISALLOW_TRY_IN_A_DAY;
+      return EUrlCrawlDecisionPb::ALLOW;
+    return EUrlCrawlDecisionPb::DISALLOW_TRY_IN_A_DAY;
   }
   // last attempt 4xx or 5xx - try in a day
   if (last_attempt.status == CrawlAttemptsPb::ATTEMPT_STATUS_4xx ||
@@ -67,11 +67,11 @@ EUrlCrawlDecisionPb UrlDb::_IsNeedCrawlRobots(const Url &_robots_url,
 
     if (std::chrono::duration_cast<std::chrono::hours>(
             _now - last_attempt.tp) >= std::chrono::hours{24})
-      return ALLOW;
-    return DISALLOW_TRY_IN_A_DAY;
+      return EUrlCrawlDecisionPb::ALLOW;
+    return EUrlCrawlDecisionPb::DISALLOW_TRY_IN_A_DAY;
   }
   // otherwise
-  return DISALLOW_NO_REASON;
+  return EUrlCrawlDecisionPb::DISALLOW_NO_REASON;
 }
 
 } // namespace contentv1

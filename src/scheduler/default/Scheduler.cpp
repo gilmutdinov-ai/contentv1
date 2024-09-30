@@ -39,7 +39,7 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
 
     LOG("Loading dataset for mock kafka: " << dataset_path);
 
-    auto gened_visits_dataset =
+    const auto gened_visits_dataset =
         misc::KafkaReaderMock::loadNewlineFile(dataset_path);
     LOG("DONE, visits: " << gened_visits_dataset.size());
     LOG("Init KafkaReaderMock");
@@ -75,7 +75,7 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
   if (_dry_run) {
     LOG("Calling m_load_loop->_loopImpl()");
     constexpr bool kafka_dont_block = true;
-    auto cnt = m_load_loop->_loopImpl(kafka_dont_block);
+    const auto cnt = m_load_loop->_loopImpl(kafka_dont_block);
     LOG("DONE, loaded: " << cnt);
     // sleep(2); // if empty
     LOG("Calling m_urls_days_db->waitMerged()..");
@@ -96,7 +96,7 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
   if (_dry_run) {
     // calling enqueue loop
     LOG("Calling m_enqueue_loop->_loopImpl()..");
-    auto pushed_cnt = m_enqueue_loop->_loopImpl();
+    const auto pushed_cnt = m_enqueue_loop->_loopImpl();
     LOG("DONE, pushed: " << pushed_cnt);
   }
 
@@ -106,7 +106,7 @@ Scheduler::Scheduler(const SchedulerConfig &_config, bool _dry_run,
 Cnt Scheduler::_fillUrlFreqStats(UrlsDaysDb::Ptr _urls_days_db,
                                  UrlFreqStatsLF::Ptr _url_freq_stats) {
   Cnt all_uts = 0;
-  auto now = misc::get_now();
+  const auto now = misc::get_now();
   _urls_days_db->iterateAll(
       [&](const Url &_url, const std::vector<UrlTpStat> &_utsv) {
         for (size_t i = 0; i < _utsv.size(); ++i) {

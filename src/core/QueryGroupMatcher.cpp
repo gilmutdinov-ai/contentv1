@@ -26,8 +26,8 @@ bool QueryGroupMatcher::match(const std::string &_content,
   std::set<GroupId> gids_set;
   auto matches = m_trie.parse_text(_content); // emit type
 
-  auto keyword_groups_end = m_keyword_groups.end();
-  for (const auto &match : matches) {
+  for (auto keyword_groups_end = m_keyword_groups.end();
+       const auto &match : matches) {
     const auto query = match.get_keyword();
     auto it = m_keyword_groups.find(query);
     if (it != keyword_groups_end)

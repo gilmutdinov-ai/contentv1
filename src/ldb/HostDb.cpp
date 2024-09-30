@@ -8,13 +8,14 @@ HostDbConfig::HostDbConfig() { addStrings(s_cfg_strings); }
 
 HostDb::HostDb(const HostDbConfig &_config) : m_limits(_config) {
 
-  auto _path = _config[HostDbConfig::STR_HOST_DB_PATH].as<std::string>();
+  const auto fs_path =
+      _config[HostDbConfig::STR_HOST_DB_PATH].as<std::string>();
 
-  std::filesystem::create_directories(_path);
+  std::filesystem::create_directories(fs_path);
 
   leveldb::Options options;
   options.create_if_missing = true;
-  leveldb::Status status = leveldb::DB::Open(options, _path.c_str(), &m_db);
+  leveldb::Status status = leveldb::DB::Open(options, fs_path.c_str(), &m_db);
   if (!status.ok())
     throw std::runtime_error("HostDb::HostDb leveldb !ok " + status.ToString());
   _loadRobotsDb();
@@ -32,23 +33,12 @@ void HostDb::_loadRobotsDb() {
 }
 
 HostDb::~HostDb() { delete m_db; }
-/*
-void HostDb::onCrawled(const std::vector<Url> &_urls) {
-  std::lock_guard<std::mutex> lock(m_mtx);
-  for (size_t i = 0; i < _urls.size(); ++i) {
-    UrlParsed url_parsed{_urls[i]};
-    if (!url_parsed.ok())
-      continue;
-    m_host_freq[url_parsed.host()].decCrawling();
-    m_global_freq.decCrawling();
-  }
-}*/
 
 void HostDb::onFetched(const std::vector<FetchResult> &_results) {
 
   std::lock_guard<std::mutex> lock(m_mtx);
   for (size_t i = 0; i < _results.size(); ++i) {
-    UrlParsed url_parsed{_results[i].gfq.url};
+    const UrlParsed url_parsed{_results[i].gfq.url};
     if (!url_parsed.ok())
       continue;
     m_host_freq[url_parsed.host()].decCrawling();

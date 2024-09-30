@@ -102,9 +102,9 @@ public:
   void saveVisitsPack(const UrlTpStat &_utp);
 
   // READ
-  Cnt size();
+  [[nodiscard]] Cnt size();
   void print();
-  bool getUTSV(const Url &_url, std::vector<UrlTpStat> &_utsv);
+  [[nodiscard]] bool getUTSV(const Url &_url, std::vector<UrlTpStat> &_utsv);
 
   void iterateAll(
       std::function<void(const Url &, const std::vector<UrlTpStat> &)> _cb);

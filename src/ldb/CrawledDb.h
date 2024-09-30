@@ -45,8 +45,8 @@ public:
 
   void saveResult(CrawlAttemptsPb::AttemptStatus _result);
   void saveResult(CrawlAttemptsPb::AttemptStatus _result, Cnt _cnt);
-  Cnt getFinishedToday();
-  Cnt getInProgress();
+  [[nodiscard]] Cnt getFinishedToday();
+  [[nodiscard]] Cnt getInProgress();
 
 private:
   std::vector<int> m_enum_finished_values;

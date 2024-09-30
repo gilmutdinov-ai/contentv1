@@ -108,17 +108,20 @@ private:
                  const std::string &_api_secret_key, std::string &_token,
                  long &_expires_in);
 
-  static bool _checkToken(const std::string &_token);
-  static bool _isToken(const std::string &_token);
-  static std::string hash(const std::string &_str);
-  static bool _auth(const httplib::Headers &_headers, std::string &_error_str);
+  [[nodiscard]] static bool _checkToken(const std::string &_token);
+  [[nodiscard]] static bool _isToken(const std::string &_token);
+  [[nodiscard]] static std::string hash(const std::string &_str);
+  [[nodiscard]] static bool _auth(const httplib::Headers &_headers,
+                                  std::string &_error_str);
 
   // PARSING
-  static bool _parseApiKeys(const httplib::Headers &_headers,
-                            std::string &_api_key, std::string &_api_secret_key,
-                            std::string &_error_str);
-  static bool _parseBearer(const httplib::Headers &_headers,
-                           std::string &_token, std::string &_error_str);
+  [[nodiscard]] static bool _parseApiKeys(const httplib::Headers &_headers,
+                                          std::string &_api_key,
+                                          std::string &_api_secret_key,
+                                          std::string &_error_str);
+  [[nodiscard]] static bool _parseBearer(const httplib::Headers &_headers,
+                                         std::string &_token,
+                                         std::string &_error_str);
 
   // HANDLERS
   void hdlVersion(const APIRequest &_api_req, APIResponse &_api_res);

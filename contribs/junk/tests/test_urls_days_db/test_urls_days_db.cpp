@@ -41,7 +41,7 @@ int main() {
 
     assert(db.size() == 1);
     std::vector<UrlTpStat> utsv;
-    db.getUTSV(url, utsv);
+    REQUIRE(db.getUTSV(url, utsv));
     // std::cout << "utsv.size: " << utsv.size() << std::endl;
     assert(utsv.size() == 12);
     assert(utsv[0].cnt == 1);

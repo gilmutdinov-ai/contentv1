@@ -27,7 +27,7 @@ void UrlDb::setResult(const Url &_url, CrawlAttemptsPb::AttemptStatus _status,
 }
 
 void UrlDb::onFetched(const std::vector<FetchResult> &_results) {
-  auto now = misc::get_now();
+  const auto now = misc::get_now();
 
   std::lock_guard<std::mutex> lock(m_mtx);
   for (size_t i = 0; i < _results.size(); ++i)

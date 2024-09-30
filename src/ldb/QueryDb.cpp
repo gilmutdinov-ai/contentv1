@@ -7,10 +7,10 @@ namespace contentv1 {
 QueryDbConfig::QueryDbConfig() { addStrings(s_cfg_strings); }
 
 QueryDb::QueryDb(const QueryDbConfig &_config) {
-  auto _query_db_path =
+  const auto _query_db_path =
       _config[QueryDbConfig::STR_QUERY_DB_PATH].as<std::string>();
-  auto query_db_qg_path = _query_db_path + "/qg";
-  auto query_db_qg_hits_path = _query_db_path + "/hits";
+  const auto query_db_qg_path = _query_db_path + "/qg";
+  const auto query_db_qg_hits_path = _query_db_path + "/hits";
 
   std::filesystem::create_directories(query_db_qg_path);
   m_qg_db.reset(new misc::LvlDb(query_db_qg_path));

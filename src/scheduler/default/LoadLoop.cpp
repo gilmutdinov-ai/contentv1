@@ -27,7 +27,7 @@ Cnt LoadLoop::_loopImpl(bool _kafka_dont_block) {
   UrlVisitsReader::read(m_kafka_reader, _kafka_dont_block,
                         [&](const UrlVisit &_uv) {
                           // LOG("UrlVisitsReader::read: " << _uv.url);
-                          auto now = misc::get_now();
+                          const auto now = misc::get_now();
                           m_url_freq_stats->insert(_uv, now);
                           m_urls_days_db->saveVisit(_uv);
                           ++loaded_cnt;

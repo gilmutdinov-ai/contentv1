@@ -98,7 +98,7 @@ public:
             bool _in_bazel_test = false, bool _mock_kafka = false);
   virtual ~Scheduler();
 
-  FetchStats getStats() const;
+  [[nodiscard]] FetchStats getStats() const;
 
   void start();
   void stop();

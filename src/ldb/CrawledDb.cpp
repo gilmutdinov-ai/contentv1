@@ -29,7 +29,7 @@ CrawledDb::CrawledDb(const CrawledDbConfig &_config) {
 
 void CrawledDb::_fillEnumFinishedValues() {
 
-  auto descr = CrawlAttemptsPb_AttemptStatus_descriptor();
+  const auto descr = CrawlAttemptsPb_AttemptStatus_descriptor();
   // skip
   //   ATTEMPT_STATUS_ENQUEUED = 0, -  не декрементится когда PENDING
   //   ATTEMPT_STATUS_PENDING = 1,
@@ -56,7 +56,7 @@ Cnt CrawledDb::getInProgress() {
 
 Cnt CrawledDb::_getTodayEvents(int _event_id) {
 
-  Url url = genFakeUrlForResult(_event_id);
+  const Url url = genFakeUrlForResult(_event_id);
   std::vector<UrlTpStat> utsv;
   if (m_db->getUTSV(url, utsv) && !utsv.empty())
     return utsv[utsv.size() - 1].cnt;

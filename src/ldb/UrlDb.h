@@ -73,8 +73,9 @@ private:
   void _snapThread();
   void _snapData();
 
-  EUrlCrawlDecisionPb _IsNeedCrawl(const Url &_url, Tp _now) const;
-  EUrlCrawlDecisionPb _IsNeedCrawlRobots(const Url &_robots_url, Tp _now) const;
+  EUrlCrawlDecisionPb _IsNeedCrawl(const Url &_url, const Tp _now) const;
+  EUrlCrawlDecisionPb _IsNeedCrawlRobots(const Url &_robots_url,
+                                         const Tp _now) const;
 
   void _setEnqueued(const Url &_url, Tp tp);
   void _setStatus(const FetchResult &_result, Tp _now);
@@ -94,12 +95,12 @@ public:
   // READ
   // what is crawlable according to policy, const if not mutex
   std::vector<EUrlCrawlDecisionPb>
-  leaveNeedUrls(const std::vector<UrlFreq> &in_urls, Tp now,
+  leaveNeedUrls(const std::vector<UrlFreq> &in_urls, const Tp now,
                 std::vector<UrlFreq> &out_urls);
 
   // robots: what is crawlable according to robots policy, const if not mutex
   std::vector<EUrlCrawlDecisionPb>
-  leaveNeedRobots(const std::vector<UrlFreq> &_in_robots, Tp _now,
+  leaveNeedRobots(const std::vector<UrlFreq> &_in_robots, const Tp _now,
                   std::vector<UrlFreq> &_need_robots);
 
   [[nodiscard]] bool getAttempts(const Url &_url, CrawlAttempts &_ca);

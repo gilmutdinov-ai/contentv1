@@ -25,7 +25,7 @@ void APIv1::hdlSetQueryGroup(const APIRequest &_api_req,
                              APIResponse &_api_res) {
   Json::Value js;
   if (!Json::Reader().parse(_api_req.body, js)) {
-    static std::string err{"err: parsing json req body"};
+    static const std::string err{"err: parsing json req body"};
     LOG(err);
     _api_res.setBadRequest(err);
     return;
@@ -33,7 +33,7 @@ void APIv1::hdlSetQueryGroup(const APIRequest &_api_req,
   auto qg = QueryGroup::fromJson(_api_req.body);
   std::string err_str;
   if (!m_query_db->saveQG(qg, err_str)) {
-    std::string err{"err: set gid:" + qg.gid};
+    const std::string err{"err: set gid:" + qg.gid};
     LOG(err);
     _api_res.setInternalError(err);
     return;
@@ -51,7 +51,7 @@ void APIv1::hdlGetQueryGroup(const APIRequest &_api_req,
   {
     auto it = _api_req.params.find("gid");
     if (it == _api_req.params.end()) {
-      static std::string err{"err: parsing gid param"};
+      static const std::string err{"err: parsing gid param"};
       LOG(err);
       _api_res.setBadRequest(err);
       return;
@@ -60,7 +60,7 @@ void APIv1::hdlGetQueryGroup(const APIRequest &_api_req,
   }
   QueryGroup qg;
   if (!m_query_db->loadQG(gid, qg)) {
-    static std::string err{"err: not exist"};
+    static const std::string err{"err: not exist"};
     LOG(err);
     _api_res.setBadRequest(err);
     return;
@@ -91,7 +91,7 @@ void APIv1::hdlDeleteQueryGroup(const APIRequest &_api_req,
   std::string err_hits_str;
   if (!m_query_db->deleteQG(gid, err_str) ||
       !m_query_db->deleteQGHits(gid, err_hits_str)) {
-    std::string err{"err: deleting gid:" + gid};
+    const std::string err{"err: deleting gid:" + gid};
     LOG("deleteQG:" << err_str << " deleteQGHits:" << err_hits_str);
     _api_res.setBadRequest(err);
     return;

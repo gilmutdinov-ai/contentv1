@@ -42,9 +42,9 @@ bool APIv1::_genToken(const std::string &_api_key,
       return false;
   }
 
-  std::string token_body =
+  const std::string token_body =
       misc::last_n(misc::base64_encode(_api_key), 5) + misc::gen_random_str(6);
-  std::string token_hash = misc::last_n(hash(token_body + s_pepper), 5);
+  const std::string token_hash = misc::last_n(hash(token_body + s_pepper), 5);
 
   _token = token_body + token_hash;
   _expires_in = s_token_expires_in;
@@ -57,8 +57,8 @@ bool APIv1::_checkToken(const std::string &_token) {
   if (_token.size() != s_token_size)
     return false;
 
-  std::string token_body = _token.substr(0, 11);
-  std::string token_hash = misc::last_n(_token, 5);
+  const std::string token_body = _token.substr(0, 11);
+  const std::string token_hash = misc::last_n(_token, 5);
 
   if (misc::last_n(hash(token_body + s_pepper), 5) != token_hash)
     return false;
