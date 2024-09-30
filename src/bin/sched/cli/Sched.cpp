@@ -10,9 +10,9 @@ namespace contentv1 {
 int Sched::operator()(int argc, char **argv) {
 
   CliAction cli_action = _parseArgs(argc, argv);
-  if (cli_action == EXIT_OK)
+  if (cli_action == CliAction::EXIT_OK)
     return 0;
-  else if (cli_action == PARSING_ERROR)
+  else if (cli_action == CliAction::PARSING_ERROR)
     return 1;
 
 #warning ALLOW_DRY_RUN_FROM_UT_BAZEL
@@ -103,19 +103,19 @@ Sched::CliAction Sched::_parseArgs(int argc, char **argv) {
 
   if (vm.count("help")) {
     LOG(desc);
-    return EXIT_OK;
+    return CliAction::EXIT_OK;
   }
 
   if (vm.count("config_help")) {
     LOG(SchedConfig{}.help());
     LOG("Example: src/bin/sched/ut/sched_ut.conf");
-    return EXIT_OK;
+    return CliAction::EXIT_OK;
   }
 
   m_is_dry_run = false;
   if (vm.count("dry_run")) {
     m_is_dry_run = true;
-    return DRY_RUN;
+    return CliAction::DRY_RUN;
   }
 
   m_is_under_bazel_test = false;
@@ -123,7 +123,7 @@ Sched::CliAction Sched::_parseArgs(int argc, char **argv) {
     m_is_under_bazel_test = true;
   }
 
-  return NORMAL_RUN;
+  return CliAction::NORMAL_RUN;
 }
 
 } // namespace contentv1

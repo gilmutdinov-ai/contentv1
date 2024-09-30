@@ -54,7 +54,8 @@ LoadLoopTester::LoadLoopTester() {
   auto urls_days_size_pre = m_urls_days_db->size();
 
   // OUR PATIENT: loading test data
-  auto loaded_cnt = m_load_loop->_loopImpl();
+  constexpr bool kafka_dont_block{false}; // kafka mocked
+  auto loaded_cnt = m_load_loop->_loopImpl(kafka_dont_block);
   std::cout << "_loopImpl loaded_cnt: " << loaded_cnt << std::endl;
 
   // post condition

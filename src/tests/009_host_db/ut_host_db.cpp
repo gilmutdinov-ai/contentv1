@@ -53,7 +53,8 @@ TEST_CASE("Test HostDb", "[HostDb]") {
         db.tryCrawl(try_urls, misc::get_now(), allowed_urls, need_robots);
 
     for (size_t i = 0; i < decisions.size(); ++i)
-      std::cout << decisions[i] << ": " << try_urls[i] << std::endl;
+      std::cout << static_cast<int>(decisions[i]) << ": " << try_urls[i]
+                << std::endl;
     std::cout << std::endl;
 
     REQUIRE(decisions.size() == 2);

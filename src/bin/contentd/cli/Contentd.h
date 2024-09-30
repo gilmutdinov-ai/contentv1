@@ -23,7 +23,7 @@ public:
 
 class Contentd {
 
-  enum CliAction {
+  enum class CliAction {
     EXIT_OK = 0,
     PARSING_ERROR = 1,
     DRY_RUN = 2,

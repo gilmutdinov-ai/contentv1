@@ -93,7 +93,7 @@ private:
   using Handler =
       std::function<void(const APIRequest &_api_req, APIResponse &_api_res)>;
 
-  enum Method { GET = 0, POST = 1, DELETE = 2 };
+  enum class Method { GET = 0, POST = 1, DELETE = 2 };
 
   struct Route {
 

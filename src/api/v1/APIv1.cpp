@@ -91,37 +91,37 @@ void APIv1::_setupServer() {
   };
 
   ////// ROUTES NO AUTH
-  m_routes.push_back({GET, "/version",
+  m_routes.push_back({Method::GET, "/version",
                       false, // need_auth
                       std::bind(&APIv1::hdlVersion, this, std::placeholders::_1,
                                 std::placeholders::_2)});
-  m_routes.push_back({GET, "/token",
+  m_routes.push_back({Method::GET, "/token",
                       false, // need_auth
                       std::bind(&APIv1::hdlToken, this, std::placeholders::_1,
                                 std::placeholders::_2)});
 
   ////// ROUTES NEED AUTH
-  m_routes.push_back({GET, "/check_token",
+  m_routes.push_back({Method::GET, "/check_token",
                       true, // need_auth
                       std::bind(&APIv1::hdlCheckToken, this,
                                 std::placeholders::_1, std::placeholders::_2)});
-  m_routes.push_back({GET, "/get_query_groups_list",
+  m_routes.push_back({Method::GET, "/get_query_groups_list",
                       true, // need_auth
                       std::bind(&APIv1::hdlGetQueryGroupsList, this,
                                 std::placeholders::_1, std::placeholders::_2)});
-  m_routes.push_back({POST, "/set_query_group",
+  m_routes.push_back({Method::POST, "/set_query_group",
                       true, // need_auth
                       std::bind(&APIv1::hdlSetQueryGroup, this,
                                 std::placeholders::_1, std::placeholders::_2)});
-  m_routes.push_back({DELETE, "/delete_query_group",
+  m_routes.push_back({Method::DELETE, "/delete_query_group",
                       true, // need_auth
                       std::bind(&APIv1::hdlDeleteQueryGroup, this,
                                 std::placeholders::_1, std::placeholders::_2)});
-  m_routes.push_back({GET, "/get_query_group",
+  m_routes.push_back({Method::GET, "/get_query_group",
                       true, // need_auth
                       std::bind(&APIv1::hdlGetQueryGroup, this,
                                 std::placeholders::_1, std::placeholders::_2)});
-  m_routes.push_back({GET, "/get_hits",
+  m_routes.push_back({Method::GET, "/get_hits",
                       true, // need_auth
                       std::bind(&APIv1::hdlGetHits, this, std::placeholders::_1,
                                 std::placeholders::_2)});
@@ -152,17 +152,17 @@ void APIv1::_setupServer() {
 
     for (auto i = 0; i < m_routes.size(); ++i) {
       const auto &route = m_routes[i];
-      if (route.method == GET) {
+      if (route.method == Method::GET) {
         m_srv->Get(route.path, [&](const httplib::Request &_httpreq,
                                    httplib::Response &_httpres) {
           handler_wrap(route, _httpreq, _httpres);
         });
-      } else if (route.method == POST) {
+      } else if (route.method == Method::POST) {
         m_srv->Post(route.path, [&](const httplib::Request &_httpreq,
                                     httplib::Response &_httpres) {
           handler_wrap(route, _httpreq, _httpres);
         });
-      } else if (route.method == DELETE) {
+      } else if (route.method == Method::DELETE) {
         m_srv->Delete(route.path, [&](const httplib::Request &_httpreq,
                                       httplib::Response &_httpres) {
           handler_wrap(route, _httpreq, _httpres);

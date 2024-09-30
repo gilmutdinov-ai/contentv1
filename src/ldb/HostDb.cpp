@@ -117,7 +117,7 @@ HostDb::tryCrawl(const std::vector<Url> &_try_urls, Tp now,
 
     UrlParsed url_parsed{_try_urls[i]};
     if (!url_parsed.ok()) {
-      crawl_decisions.push_back(DISALLOW_URL_PARSING);
+      crawl_decisions.push_back(EHostCrawlDecision::DISALLOW_URL_PARSING);
       continue;
     }
 
@@ -125,9 +125,9 @@ HostDb::tryCrawl(const std::vector<Url> &_try_urls, Tp now,
     EHostCrawlDecision decision = _tryCrawl(url_parsed, need_robots);
     crawl_decisions.push_back(decision);
 
-    if (decision == ALLOW) {
+    if (decision == EHostCrawlDecision::ALLOW) {
       _allowed_urls.push_back(url_parsed.normalized());
-    } else if (decision == DISALLOW_NEED_ROBOTS) {
+    } else if (decision == EHostCrawlDecision::DISALLOW_NEED_ROBOTS) {
       need_robots_set.insert(need_robots);
     }
   }
@@ -150,7 +150,7 @@ HostDb::tryCrawl(const std::vector<GFQRecord> &_try_urls, Tp now,
 
     UrlParsed url_parsed{_try_urls[i].url};
     if (!url_parsed.ok()) {
-      crawl_decisions.push_back(DISALLOW_URL_PARSING);
+      crawl_decisions.push_back(EHostCrawlDecision::DISALLOW_URL_PARSING);
       continue;
     }
 
@@ -158,9 +158,9 @@ HostDb::tryCrawl(const std::vector<GFQRecord> &_try_urls, Tp now,
     EHostCrawlDecision decision = _tryCrawl(url_parsed, need_robots);
     crawl_decisions.push_back(decision);
 
-    if (decision == ALLOW) {
+    if (decision == EHostCrawlDecision::ALLOW) {
       _allowed_urls.push_back(_try_urls[i]);
-    } else if (decision == DISALLOW_NEED_ROBOTS) {
+    } else if (decision == EHostCrawlDecision::DISALLOW_NEED_ROBOTS) {
       need_robots_set.insert(need_robots);
     }
   }
@@ -189,16 +189,16 @@ HostDb::EHostCrawlDecision HostDb::_tryCrawl(const UrlParsed &_url_parsed,
 
   if (!_isAllowedRobots(_url_parsed, need_robots)) {
     if (!need_robots.empty())
-      return DISALLOW_NEED_ROBOTS;
-    return DISALLOW_BY_ROBOTS;
+      return EHostCrawlDecision::DISALLOW_NEED_ROBOTS;
+    return EHostCrawlDecision::DISALLOW_BY_ROBOTS;
   }
 
   auto host = _url_parsed.host();
   if (!_isAllowedFreq(host))
-    return DISALLOW_FREQ;
+    return EHostCrawlDecision::DISALLOW_FREQ;
 
   _setCrawling(host);
-  return ALLOW;
+  return EHostCrawlDecision::ALLOW;
 }
 
 bool HostDb::_isAllowedRobots(const UrlParsed &_url_parsed,

@@ -47,7 +47,7 @@ class HostDb {
   leveldb::DB *m_db;
 
 public:
-  enum EHostCrawlDecision {
+  enum class EHostCrawlDecision {
     ALLOW = 1,
     DISALLOW_NEED_ROBOTS = 2,
     DISALLOW_BY_ROBOTS = 3,
