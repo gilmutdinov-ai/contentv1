@@ -21,7 +21,6 @@ void FetchResult::toPb(FetchResultPb &_pb) const {
   _pb.set_content(content);
 }
 
-#warning CHECK_THIS_WORKS
 void FetchResult::toPb(FetchResultPb *_pb) const { toPb(*_pb); }
 
 bool FetchResult::isOk() const {

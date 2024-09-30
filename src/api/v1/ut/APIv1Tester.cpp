@@ -243,9 +243,7 @@ void APIv1Tester::_getHitsAndCompare(const std::string &_token,
 }
 
 APIv1Tester::APIv1Tester() {
-#warning NOT_IMPLEMENTED
   // ORDER MATTERS!
-
   _setUp();
   // test1:
   //   setup api

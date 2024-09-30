@@ -26,11 +26,11 @@ bool QueryGroupMatcher::match(const std::string &_content,
   std::set<GroupId> gids_set;
   auto matches = m_trie.parse_text(_content); // emit type
 
-  auto end = m_keyword_groups.end();
+  auto keyword_groups_end = m_keyword_groups.end();
   for (const auto &match : matches) {
     const auto query = match.get_keyword();
     auto it = m_keyword_groups.find(query);
-    if (it != m_keyword_groups.end())
+    if (it != keyword_groups_end)
       for (const auto &gid_hit : it->second)
         gids_set.insert(gid_hit);
   }

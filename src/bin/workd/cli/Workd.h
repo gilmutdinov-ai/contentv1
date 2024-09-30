@@ -43,7 +43,7 @@ class Workd {
   FetchStats m_fetch_stats;
 
 public:
-  int operator()(int argc, char **argv);
+  int operator()(int argc, const char **argv);
 
   bool isStatsEqual() const;
   bool isStatsAnyOk() const;
@@ -51,6 +51,6 @@ public:
   ~Workd();
 
 private:
-  CliAction _parseArgs(int argc, char **argv);
+  CliAction _parseArgs(int argc, const char **argv);
 };
 } // namespace contentv1

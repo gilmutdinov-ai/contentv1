@@ -23,6 +23,9 @@ if [ "$regen" = true ] ; then
   echo "$fn not exist. Generating.."
   cd infra/local/kafka/ && npm install . ; cd -
   node infra/local/kafka/gen_visits_ds.js file
+  echo "performing bazel clean.."
+  bazel clean $BAZEL_CACHE_OPT $BAZEL_REPO_CACHE_OPT $BAZEL_REGISTRY_OPT --symlink_prefix $BAZEL_SYMLINK_PREFIX
+  echo "DONE"
 else
   echo "Will use existing $fn (-r to regenrate or delete it)"
 fi

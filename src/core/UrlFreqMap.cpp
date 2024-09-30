@@ -23,7 +23,7 @@ void UrlFreqMap::insertVisitsPack(const UrlTpStat &_uts, Tp _now) {
 }
 
 void UrlFreqMap::merge(const UrlFreqMap &_a) {
-#warning NOT_IMPLEMENTED
+
   // merge maps
   auto end = _a.m_url_freq.end();
   for (auto it = _a.m_url_freq.begin(); it != end; ++it)

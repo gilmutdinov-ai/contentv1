@@ -25,9 +25,9 @@ public:
   void merge(const UrlFreqMap &_a);
   // READ
   void getTopUrls(std::vector<UrlFreq> &_urls_v) const;
-  size_t size() const;
+  [[nodiscard]] size_t size() const;
 
-  bool checkSortedAndDestroyQueue();
+  [[nodiscard]] bool checkSortedAndDestroyQueue();
 
 private:
   void checkCleanup(Tp now);

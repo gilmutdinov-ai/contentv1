@@ -21,7 +21,7 @@ public:
 
   virtual ~UrlFreqStats() = default;
 
-  virtual Cnt max();
+  [[nodiscard]] virtual Cnt max();
 
   virtual void insert(const UrlVisit &url_visit, Tp now);
   virtual void insertVisitsPack(const UrlTpStat &_uts, Tp _now);

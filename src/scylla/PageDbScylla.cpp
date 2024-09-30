@@ -6,7 +6,7 @@ namespace contentv1 {
 PageDbScyllaConfig::PageDbScyllaConfig() { addArrays(s_cfg_arrays); }
 
 PageDbScylla::PageDbScylla(const PageDbScyllaConfig &_config) {
-#warning NOT_IMPLEMENTED
+
   m_cluster = cass_cluster_new();
   m_session = cass_session_new();
 

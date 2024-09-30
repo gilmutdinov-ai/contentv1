@@ -11,7 +11,7 @@ WorkdConfig::WorkdConfig() { addStrings({STR_SCHED_GRPC_TARGET_STR}); }
 
 Workd::~Workd() { LOG("~Workd() start/finish"); }
 
-int Workd::operator()(int argc, char **argv) {
+int Workd::operator()(int argc, const char **argv) {
 
   CliAction cli_action = _parseArgs(argc, argv);
   if (cli_action == CliAction::EXIT_OK)
@@ -19,7 +19,7 @@ int Workd::operator()(int argc, char **argv) {
   else if (cli_action == CliAction::PARSING_ERROR)
     return 1;
 
-#warning ALLOW_DRY_RUN_FROM_UT_BAZEL
+#pragma message "ALLOW_DRY_RUN_FROM_UT_BAZEL"
 
   WorkdConfig workd_config;
   try {
@@ -96,7 +96,7 @@ namespace po = boost::program_options;
 // _parseArgs
 //   sets m_is_dry_run, m_config_path
 //
-Workd::CliAction Workd::_parseArgs(int argc, char **argv) {
+Workd::CliAction Workd::_parseArgs(int argc, const char **argv) {
 
   po::options_description desc("General options");
   std::string task_type;

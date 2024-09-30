@@ -22,8 +22,8 @@ struct FetchResult {
   void toPb(FetchResultPb &_pb) const;
   void toPb(FetchResultPb *_pb) const;
 
-  bool isOk() const;
-  bool isRobots() const;
+  [[nodiscard]] bool isOk() const;
+  [[nodiscard]] bool isRobots() const;
 };
 
 } // namespace contentv1

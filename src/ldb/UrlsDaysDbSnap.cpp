@@ -20,7 +20,7 @@ void UrlsDaysDb::_loadSnapshot() {
       m_db->NewIterator(leveldb::ReadOptions())};
   for (it->SeekToFirst(); it->Valid(); it->Next()) {
     urls_days_local.m_urls_days[it->key().ToString()] =
-        std::move(UrlsLastDays::UrlDaysImpl{it->value().ToString()});
+        UrlsLastDays::UrlDaysImpl{it->value().ToString()};
   }
   if (!it->status().ok()) {
     std::cerr << "UrlsDaysDb::_loadSnapshot scan error\n";

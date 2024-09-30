@@ -25,7 +25,7 @@ public:
 
   // UrlFreqStats override
 
-  Cnt max() override;
+  [[nodiscard]] Cnt max() override;
 
   void insert(const UrlVisit &url_visit, Tp now) override;
   void insertVisitsPack(const UrlTpStat &_uts, Tp _now) override;

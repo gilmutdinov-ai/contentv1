@@ -172,7 +172,7 @@ void EnqueueLoopTester::_printPushUrls(const std::vector<UrlFreq> &_ufv,
       break;
     }
     auto url = _ufv[i].first;
-    auto freq = _ufv[i].second;
+    // auto freq = _ufv[i].second;
     auto url_id = parse_test_url_id(url);
 
     std::cout << url_id << ": " << url << std::endl;

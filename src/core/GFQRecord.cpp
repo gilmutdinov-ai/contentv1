@@ -31,7 +31,6 @@ void GFQRecord::toPb(GFQRecordPb &_pb) const {
   _pb.set_attempt_ts(attempt_ts);
 }
 
-#warning CHECK_THIS_WORKS
 void GFQRecord::toPb(GFQRecordPb *_pb) const { toPb(*_pb); }
 
 std::string GFQRecord::dump() const {

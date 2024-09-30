@@ -102,7 +102,7 @@ public:
   leaveNeedRobots(const std::vector<UrlFreq> &_in_robots, Tp _now,
                   std::vector<UrlFreq> &_need_robots);
 
-  bool getAttempts(const Url &_url, CrawlAttempts &_ca);
-  Cnt size();
+  [[nodiscard]] bool getAttempts(const Url &_url, CrawlAttempts &_ca);
+  [[nodiscard]] Cnt size();
 };
 } // namespace contentv1

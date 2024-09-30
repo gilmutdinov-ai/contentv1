@@ -15,15 +15,15 @@ public:
   GFQRecord(const std::string &_url, Ts _attempt_ts);
   GFQRecord(const std::string &_dump);
   // GFQRecord(const GFQRecordPb &_pb);
-  std::string dump() const;
-  bool isRobots() const;
+  [[nodiscard]] std::string dump() const;
+  [[nodiscard]] bool isRobots() const;
 
   bool operator<(const GFQRecord &_a) const;
 
   void toPb(GFQRecordPb &_pb) const;
   void toPb(GFQRecordPb *_pb) const;
 
-  static GFQRecord fromPb(const GFQRecordPb &_pb);
+  [[nodiscard]] static GFQRecord fromPb(const GFQRecordPb &_pb);
   static void fromPb(GFQRecord &_, const GFQRecordPb &_pb);
 };
 

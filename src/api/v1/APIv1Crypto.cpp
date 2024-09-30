@@ -7,7 +7,7 @@
 namespace contentv1 {
 
 std::string APIv1::hash(const std::string &_str) {
-#warning REPLACE_WITH_REAL_CRYPTO_HASH
+#pragma message "REPLACE_WITH_REAL_CRYPTO_HASH"
   std::stringstream ss;
   ss << std::hash<std::string>{}(_str);
   return misc::base64_encode(ss.str());

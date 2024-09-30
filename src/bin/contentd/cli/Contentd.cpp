@@ -11,15 +11,13 @@ namespace contentv1 {
 
 ContentdConfig::ContentdConfig() { addStrings(s_cfg_strings); }
 
-int Contentd::operator()(int argc, char **argv) {
+int Contentd::operator()(int argc, const char **argv) {
 
   CliAction cli_action = _parseArgs(argc, argv);
   if (cli_action == CliAction::EXIT_OK)
     return 0;
   else if (cli_action == CliAction::PARSING_ERROR)
     return 1;
-
-#warning ALLOW_DRY_RUN_FROM_UT_BAZEL
 
   ContentdConfig contentd_config;
   try {
@@ -123,7 +121,7 @@ namespace po = boost::program_options;
 // _parseArgs
 //   sets m_is_dry_run, m_config_path
 //
-Contentd::CliAction Contentd::_parseArgs(int argc, char **argv) {
+Contentd::CliAction Contentd::_parseArgs(int argc, const char **argv) {
 
   po::options_description desc("General options");
   std::string task_type;

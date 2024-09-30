@@ -13,11 +13,11 @@ class UrlParsed {
 public:
   UrlParsed(const Url &url);
 
-  bool ok() const;
-  Host host() const;
-  Url normalized() const;
-  Url robots() const;
-  bool isRobots() const;
+  [[nodiscard]] bool ok() const;
+  [[nodiscard]] Host host() const;
+  [[nodiscard]] Url normalized() const;
+  [[nodiscard]] Url robots() const;
+  [[nodiscard]] bool isRobots() const;
   //  Url reversed() const;
 };
 

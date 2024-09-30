@@ -5,6 +5,10 @@
 #include <string>
 #include <vector>
 
+#pragma clang diagnostic ignored "-W#pragma-messages"
+// simdjson
+#pragma clang diagnostic ignored "-Wambiguous-reversed-operator"
+
 namespace contentv1 {
 
 // using Duration = std::chrono::system_clock::duration;

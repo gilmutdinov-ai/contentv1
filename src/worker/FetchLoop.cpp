@@ -35,9 +35,8 @@ void FetchLoopConfig::onParsed() {
 FetchLoop::FetchLoop(misc::KafkaReaderI::Ptr _kafka_reader,
                      IScheduler::Ptr _scheduler_api, IPageDb::Ptr _page_db,
                      const FetchLoopConfig &_config)
-    : m_running(true), FetchLoopMergeQueue(_config.merge_interval_secs),
-      m_req_batch(new ReqBatch), m_kafka_reader(_kafka_reader),
-      m_scheduler_api(_scheduler_api),
+    : FetchLoopMergeQueue(_config.merge_interval_secs), m_running(true),
+      m_kafka_reader(_kafka_reader), m_scheduler_api(_scheduler_api),
       m_client(new HttpClient{
           std::bind(&FetchLoop::_onResponse, this, std::placeholders::_1),
           HttpClient::HttpSettings{_config.user_agent,
@@ -45,7 +44,7 @@ FetchLoop::FetchLoop(misc::KafkaReaderI::Ptr _kafka_reader,
                                    _config.select_interval_usecs}}),
       m_kafka_read_batch_size{_config.kafka_read_batch_size},
       m_max_requests_in_batch{_config.max_requests_in_batch},
-      m_page_db{_page_db} {
+      m_page_db{_page_db}, m_req_batch(new ReqBatch) {
   FetchLoopMergeQueue::start();
 }
 
@@ -112,7 +111,7 @@ void FetchLoop::_onResponse(HttpClient::JobInfo _ji) {
   std::string content;
 
   if (!_ji.success) {
-#warning FIX_ADD_4xx_5xx
+#pragma message "FIX_ADD_4xx_5xx"
     status = CrawlAttemptsPb::ATTEMPT_STATUS_CURL_ERR;
     error_str = _ji.curlerror;
   }

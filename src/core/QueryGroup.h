@@ -14,12 +14,12 @@ public:
   QueryGroup(const GroupId &_gid, const std::vector<Query> &_queries);
   QueryGroup() = default;
   QueryGroup(const std::string &_dump);
-  std::string dump() const;
-  std::string asJson() const;
-  Json::Value toJsonValue() const;
+  [[nodiscard]] std::string dump() const;
+  [[nodiscard]] std::string asJson() const;
+  [[nodiscard]] Json::Value toJsonValue() const;
 
-  static QueryGroup fromJson(const std::string &_mess);
-  static QueryGroup fromJson(const Json::Value &_js);
+  [[nodiscard]] static QueryGroup fromJson(const std::string &_mess);
+  [[nodiscard]] static QueryGroup fromJson(const Json::Value &_js);
 };
 
 bool operator==(const QueryGroup &a, const QueryGroup &b);
@@ -34,12 +34,12 @@ public:
 
   QueryGroupHits() = default;
   QueryGroupHits(const std::string &_dump);
-  std::string dump() const;
-  Json::Value toJsonValue() const;
-  std::string asJson() const;
+  [[nodiscard]] std::string dump() const;
+  [[nodiscard]] Json::Value toJsonValue() const;
+  [[nodiscard]] std::string asJson() const;
 
-  static QueryGroupHits fromJson(const std::string &_mess);
-  static QueryGroupHits fromJson(const Json::Value &_js);
+  [[nodiscard]] static QueryGroupHits fromJson(const std::string &_mess);
+  [[nodiscard]] static QueryGroupHits fromJson(const Json::Value &_js);
 };
 
 bool operator==(const QueryGroupHits &a, const QueryGroupHits &b);

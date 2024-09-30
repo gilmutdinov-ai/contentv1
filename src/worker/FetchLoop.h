@@ -94,7 +94,7 @@ public:
   void stop();
   void loop();
 
-  FetchStats getStats() const;
+  [[nodiscard]] FetchStats getStats() const;
 
 private:
   void _loopImpl(bool _kafka_dont_block = false);

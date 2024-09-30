@@ -19,8 +19,8 @@ class TpSlidWin {
 
 public:
   TpSlidWin(DurationSec _window);
-  Cnt size();
-  Cnt size(Tp now);
+  [[nodiscard]] Cnt size();
+  [[nodiscard]] Cnt size(Tp now);
   void inc();
   void inc(Tp now);
 };

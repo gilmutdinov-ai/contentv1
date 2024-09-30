@@ -7,7 +7,7 @@
 
 namespace contentv1 {
 
-int Sched::operator()(int argc, char **argv) {
+int Sched::operator()(int argc, const char **argv) {
 
   CliAction cli_action = _parseArgs(argc, argv);
   if (cli_action == CliAction::EXIT_OK)
@@ -15,7 +15,7 @@ int Sched::operator()(int argc, char **argv) {
   else if (cli_action == CliAction::PARSING_ERROR)
     return 1;
 
-#warning ALLOW_DRY_RUN_FROM_UT_BAZEL
+#pragma message "ALLOW_DRY_RUN_FROM_UT_BAZEL"
 
   SchedConfig sched_config;
   try {
@@ -85,7 +85,7 @@ namespace po = boost::program_options;
 // _parseArgs
 //   sets m_is_dry_run, m_config_path
 //
-Sched::CliAction Sched::_parseArgs(int argc, char **argv) {
+Sched::CliAction Sched::_parseArgs(int argc, const char **argv) {
 
   po::options_description desc("General options");
   std::string task_type;

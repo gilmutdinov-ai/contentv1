@@ -11,7 +11,7 @@ class LastPerMaps {
 public:
   LastPerMaps();
 
-  Cnt max() const;
+  [[nodiscard]] Cnt max() const;
 
   void insert(const UrlVisit &url_visit, Tp now);
   void insertVisitsPack(const UrlTpStat &_uts, Tp _now);

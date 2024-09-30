@@ -52,7 +52,7 @@ class Contentd {
   APIv1Wrap::Ptr m_api_v1_w;
 
 public:
-  int operator()(int argc, char **argv);
+  int operator()(int argc, const char **argv);
 
   bool isStatsEqual() const;
   bool isStatsAnyOk() const;
@@ -60,7 +60,7 @@ public:
   ~Contentd() { LOG("~Contentd() start/finish"); }
 
 private:
-  CliAction _parseArgs(int argc, char **argv);
+  CliAction _parseArgs(int argc, const char **argv);
 
   friend class Contentd;
 };

@@ -84,8 +84,8 @@ public:
   void onRobotsTxt(const Url &_robots_url, const std::string &_robots_str);
 
   // READ
-  bool hasRobots(const Url &url);
-  Cnt sizeRobots();
+  [[nodiscard]] bool hasRobots(const Url &url);
+  [[nodiscard]] Cnt sizeRobots();
 
 private:
   EHostCrawlDecision _tryCrawl(const UrlParsed &_url_parsed, Url &need_robots);

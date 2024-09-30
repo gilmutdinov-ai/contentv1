@@ -13,7 +13,7 @@ class HostFreq {
   TpSlidWin m_day{std::chrono::days{1}};
 
 public:
-  bool isAllowed(const CrawlLimits &_limits);
+  [[nodiscard]] bool isAllowed(const CrawlLimits &_limits);
   void incCrawling();
   void decCrawling();
 };
