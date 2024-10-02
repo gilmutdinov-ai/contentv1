@@ -77,7 +77,6 @@ public:
            std::vector<GFQRecord> &_allowed_urls,
            std::vector<Url> &_need_robots);
 
-  // void onCrawled(const std::vector<Url> &_urls);
   void onFetched(const std::vector<FetchResult> &_results);
 
   // for tests only!
