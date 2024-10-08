@@ -24,19 +24,19 @@ public:
     CrawlAttemptsPb::AttemptStatus status;
   };
 
-  Tp add();
-  Tp add(Tp tp);
-  bool set(Tp tp, CrawlAttemptsPb::AttemptStatus _status);
-
-  size_t size() const;
-  bool empty() const;
-  const CrawlAttempt &getLast() const;
-  CrawlAttempt &getLast();
-  size_t last4xx5xxCount() const;
-
   CrawlAttempts(const std::string &_dump);
   CrawlAttempts() = default;
-  std::string dump();
+  [[nodiscard]] std::string dump();
+
+  Tp add(Tp tp);
+  [[nodiscard]] Tp add();
+  [[nodiscard]] bool set(Tp tp, CrawlAttemptsPb::AttemptStatus _status);
+
+  [[nodiscard]] size_t size() const;
+  [[nodiscard]] bool empty() const;
+  [[nodiscard]] const CrawlAttempt &getLast() const;
+  [[nodiscard]] CrawlAttempt &getLast();
+  [[nodiscard]] size_t last4xx5xxCount() const;
 
 private:
   std::vector<CrawlAttempt> m_crawl_attempts; // methods expect sorted

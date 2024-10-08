@@ -17,7 +17,7 @@ struct FetchResult {
   std::string error_str;
   std::string content;
 
-  static FetchResult fromPb(const FetchResultPb &_pb);
+  [[nodiscard]] static FetchResult fromPb(const FetchResultPb &_pb);
 
   void toPb(FetchResultPb &_pb) const;
   void toPb(FetchResultPb *_pb) const;
