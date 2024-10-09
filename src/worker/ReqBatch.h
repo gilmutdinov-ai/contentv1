@@ -14,11 +14,11 @@ public:
   void acc(const GFQRecord &_req);
   void merge(const ReqBatch &_a);
 
-  size_t size() const;
-  bool empty() const;
+  [[nodiscard]] size_t size() const;
+  [[nodiscard]] bool empty() const;
   size_t getReqs(size_t _max_urls_in_batch,
                  std::vector<GFQRecord> &_reqs) const;
-  ReqBatch slice(size_t _slice_count) const;
+  [[nodiscard]] ReqBatch slice(size_t _slice_count) const;
 
   void print() const;
 };
